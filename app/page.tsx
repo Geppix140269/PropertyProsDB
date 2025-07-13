@@ -1,19 +1,9 @@
 // PATH: app/page.tsx
 'use client'
-import { useState, useEffect } from 'react'
+import { useLanguage } from '@/app/providers/language-provider'
 
 export default function HomePage() {
-  const [language, setLanguage] = useState<'it' | 'en'>('en') // Default to English
-  
-  useEffect(() => {
-    // Detect browser language
-    const browserLang = navigator.language.toLowerCase()
-    if (browserLang.startsWith('it')) {
-      setLanguage('it')
-    } else {
-      setLanguage('en')
-    }
-  }, [])
+  const { language, t } = useLanguage()
   
   return (
     <>
