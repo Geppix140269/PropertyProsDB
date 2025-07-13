@@ -1,3 +1,4 @@
+// PATH: tailwind.config.ts
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -9,18 +10,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93bbfd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
+        terracotta: {
+          DEFAULT: '#E2725B',
+          dark: '#C85A42',
+          light: '#F0937C',
         },
+        stone: {
+          DEFAULT: '#B2B2B2',
+          50: '#FAFAFA',
+          100: '#F5F5F5',
+          200: '#E5E5E5',
+          300: '#D4D4D4',
+          400: '#C3C3C3',
+          500: '#B2B2B2',
+          600: '#999999',
+          700: '#737373',
+          800: '#525252',
+          900: '#404040',
+        },
+        sea: {
+          DEFAULT: '#6495ED',
+          dark: '#4A7FDB',
+          light: '#85AEFF',
+        },
+        olive: {
+          DEFAULT: '#808000',
+          dark: '#666600',
+          light: '#999900',
+        },
+      },
+      fontFamily: {
+        playfair: ['var(--font-playfair)'],
+        opensans: ['var(--font-opensans)'],
       },
     },
   },
