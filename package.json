@@ -15,9 +15,11 @@
     "@supabase/supabase-js": "^2.43.0",
     "next-sanity": "^9.0.0",
     "sanity": "^3.42.0",
+    "@sanity/vision": "^3.42.0",
     "react-hook-form": "^7.51.0",
     "zod": "^3.23.0",
-    "@hookform/resolvers": "^3.3.4"
+    "@hookform/resolvers": "^3.3.4",
+    "groq": "^3.42.0"
   },
   "devDependencies": {
     "typescript": "^5",
