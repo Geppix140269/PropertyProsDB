@@ -1,9 +1,19 @@
 // PATH: app/page.tsx
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function HomePage() {
-  const [language, setLanguage] = useState<'it' | 'en'>('it')
+  const [language, setLanguage] = useState<'it' | 'en'>('en') // Default to English
+  
+  useEffect(() => {
+    // Detect browser language
+    const browserLang = navigator.language.toLowerCase()
+    if (browserLang.startsWith('it')) {
+      setLanguage('it')
+    } else {
+      setLanguage('en')
+    }
+  }, [])
   
   return (
     <>
@@ -14,32 +24,32 @@ export default function HomePage() {
           <div className="absolute top-20 right-8">
             <button 
               onClick={() => setLanguage(language === 'it' ? 'en' : 'it')}
-              className="flex items-center space-x-2 text-gray-600 hover:text-gray-900"
+              className="flex items-center space-x-2 px-3 py-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-all text-gray-700 font-medium"
             >
-              <span>{language === 'it' ? '🇮🇹' : '🇬🇧'}</span>
-              <span>{language === 'it' ? 'EN' : 'IT'}</span>
+              <span className="text-2xl">{language === 'en' ? '🇬🇧' : '🇮🇹'}</span>
+              <span>{language === 'en' ? 'Italiano' : 'English'}</span>
             </button>
           </div>
 
           {/* Main Message */}
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            {language === 'it' 
-              ? 'Il ponte di fiducia per il tuo investimento immobiliare in Puglia'
-              : 'Your trusted bridge to property investment in Puglia'
+            {language === 'en' 
+              ? 'Your trusted bridge to property investment in Puglia'
+              : 'Il ponte di fiducia per il tuo investimento immobiliare in Puglia'
             }
           </h1>
           
           <p className="text-xl text-gray-700 mb-12 max-w-3xl mx-auto">
-            {language === 'it'
-              ? 'Mettiamo in contatto investitori stranieri con professionisti locali verificati per acquisti immobiliari sicuri e trasparenti.'
-              : 'We connect foreign investors with verified local professionals for safe and transparent property purchases.'
+            {language === 'en'
+              ? 'We connect foreign investors with verified local professionals for safe and transparent property purchases.'
+              : 'Mettiamo in contatto investitori stranieri con professionisti locali verificati per acquisti immobiliari sicuri e trasparenti.'
             }
           </p>
 
           {/* The Choice */}
           <div className="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
             <h2 className="text-2xl font-semibold mb-8 text-gray-800">
-              {language === 'it' ? 'Chi sei?' : 'Who are you?'}
+              {language === 'en' ? 'Who are you?' : 'Chi sei?'}
             </h2>
             
             <div className="grid md:grid-cols-2 gap-6">
@@ -50,16 +60,16 @@ export default function HomePage() {
               >
                 <div className="text-6xl mb-4">🏡</div>
                 <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-green-700">
-                  {language === 'it' ? 'Voglio Comprare' : 'I Want to Buy'}
+                  {language === 'en' ? 'I Want to Buy' : 'Voglio Comprare'}
                 </h3>
                 <p className="text-gray-700 mb-4">
-                  {language === 'it'
-                    ? 'Sono un investitore straniero interessato ad acquistare proprietà in Puglia'
-                    : "I'm a foreign investor interested in buying property in Puglia"
+                  {language === 'en'
+                    ? "I'm a foreign investor interested in buying property in Puglia"
+                    : 'Sono un investitore straniero interessato ad acquistare proprietà in Puglia'
                   }
                 </p>
                 <div className="text-green-600 font-semibold group-hover:underline">
-                  {language === 'it' ? 'Scopri come possiamo aiutarti →' : 'Discover how we can help →'}
+                  {language === 'en' ? 'Discover how we can help →' : 'Scopri come possiamo aiutarti →'}
                 </div>
               </a>
 
@@ -70,16 +80,16 @@ export default function HomePage() {
               >
                 <div className="text-6xl mb-4">💼</div>
                 <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-blue-700">
-                  {language === 'it' ? 'Sono un Professionista' : "I'm a Professional"}
+                  {language === 'en' ? "I'm a Professional" : 'Sono un Professionista'}
                 </h3>
                 <p className="text-gray-700 mb-4">
-                  {language === 'it'
-                    ? 'Sono un geometra, architetto, avvocato, notaio o agenzia immobiliare'
-                    : "I'm a surveyor, architect, lawyer, notary or real estate agency"
+                  {language === 'en'
+                    ? "I'm a surveyor, architect, lawyer, notary or real estate agency"
+                    : 'Sono un geometra, architetto, avvocato, notaio o agenzia immobiliare'
                   }
                 </p>
                 <div className="text-blue-600 font-semibold group-hover:underline">
-                  {language === 'it' ? 'Entra nella rete →' : 'Join our network →'}
+                  {language === 'en' ? 'Join our network →' : 'Entra nella rete →'}
                 </div>
               </a>
             </div>
@@ -94,25 +104,25 @@ export default function HomePage() {
             <div>
               <div className="text-3xl font-bold text-gray-900">100%</div>
               <div className="text-gray-600 mt-1">
-                {language === 'it' ? 'Professionisti Verificati' : 'Verified Professionals'}
+                {language === 'en' ? 'Verified Professionals' : 'Professionisti Verificati'}
               </div>
             </div>
             <div>
               <div className="text-3xl font-bold text-gray-900">€5M+</div>
               <div className="text-gray-600 mt-1">
-                {language === 'it' ? 'Valore Transazioni' : 'Transaction Value'}
+                {language === 'en' ? 'Transaction Value' : 'Valore Transazioni'}
               </div>
             </div>
             <div>
               <div className="text-3xl font-bold text-gray-900">48h</div>
               <div className="text-gray-600 mt-1">
-                {language === 'it' ? 'Risposta Garantita' : 'Response Guaranteed'}
+                {language === 'en' ? 'Response Guaranteed' : 'Risposta Garantita'}
               </div>
             </div>
             <div>
               <div className="text-3xl font-bold text-gray-900">0€</div>
               <div className="text-gray-600 mt-1">
-                {language === 'it' ? 'Per Iniziare' : 'To Start'}
+                {language === 'en' ? 'To Start' : 'Per Iniziare'}
               </div>
             </div>
           </div>
@@ -123,25 +133,25 @@ export default function HomePage() {
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-6 text-gray-900">
-            {language === 'it' ? 'Come Funziona' : 'How It Works'}
+            {language === 'en' ? 'How It Works' : 'Come Funziona'}
           </h2>
           <div className="bg-blue-50 rounded-xl p-8">
             <p className="text-lg text-gray-700">
-              {language === 'it'
-                ? '✅ Gratis per professionisti durante la fase di lancio'
-                : '✅ Free for professionals during launch phase'
+              {language === 'en'
+                ? '✅ Free for professionals during launch phase'
+                : '✅ Gratis per professionisti durante la fase di lancio'
               }
             </p>
             <p className="text-lg text-gray-700 mt-2">
-              {language === 'it'
-                ? '✅ Piccola commissione solo su transazioni completate con successo'
-                : '✅ Small commission only on successfully completed transactions'
+              {language === 'en'
+                ? '✅ Small commission only on successfully completed transactions'
+                : '✅ Piccola commissione solo su transazioni completate con successo'
               }
             </p>
             <p className="text-lg text-gray-700 mt-2">
-              {language === 'it'
-                ? '✅ Servizi premium opzionali per maggiore visibilità'
-                : '✅ Optional premium services for increased visibility'
+              {language === 'en'
+                ? '✅ Optional premium services for increased visibility'
+                : '✅ Servizi premium opzionali per maggiore visibilità'
               }
             </p>
           </div>
