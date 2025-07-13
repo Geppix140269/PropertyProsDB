@@ -1,7 +1,7 @@
 // PATH: app/layout.tsx
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
-import "./globals.css";
+import "./global.css";
 
 const inter = Inter({ 
   subsets: ["latin"],
