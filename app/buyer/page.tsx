@@ -43,9 +43,12 @@ export default function BuyerPage() {
                 : 'Apulink ti mette in contatto con professionisti locali verificati che parlano la tua lingua e capiscono le tue esigenze. Compra con fiducia.'
               }
             </p>
-            <button className="bg-terracotta text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-terracotta-dark transition-all duration-200">
-              {language === 'en' ? 'Start Your Journey' : 'Inizia il Tuo Viaggio'}
-            </button>
+            <a 
+  href="/buyer/inquiry"
+  className="inline-block bg-terracotta text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-terracotta-dark transition-all duration-200"
+>
+  {language === 'en' ? 'Start Your Journey' : 'Inizia il Tuo Viaggio'}
+</a>
           </div>
         </div>
       </section>
@@ -283,9 +286,12 @@ export default function BuyerPage() {
               : 'Inizia con una consulenza gratuita. Nessun obbligo, solo consigli onesti.'
             }
           </p>
-          <button className="bg-white text-terracotta px-10 py-4 rounded-lg font-bold text-lg hover:bg-stone-100 transition-all duration-200">
-            {language === 'en' ? 'Get Started Today' : 'Inizia Oggi'}
-          </button>
+          <a 
+  href="/buyer/inquiry"
+  className="inline-block bg-white text-terracotta px-10 py-4 rounded-lg font-bold text-lg hover:bg-stone-100 transition-all duration-200"
+>
+  {language === 'en' ? 'Get Started Today' : 'Inizia Oggi'}
+</a>
         </div>
       </section>
     </>
