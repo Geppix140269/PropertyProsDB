@@ -10,16 +10,6 @@ export default function HomePage() {
       {/* Simple Hero - Immediate Choice */}
       <section className="min-h-[80vh] bg-gradient-to-b from-blue-50 to-white flex items-center">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* Language Toggle - Top Right */}
-          <div className="absolute top-20 right-8">
-            <button 
-              onClick={() => setLanguage(language === 'it' ? 'en' : 'it')}
-              className="flex items-center space-x-2 px-3 py-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-all text-gray-700 font-medium"
-            >
-              <span className="text-2xl">{language === 'en' ? '🇬🇧' : '🇮🇹'}</span>
-              <span>{language === 'en' ? 'Italiano' : 'English'}</span>
-            </button>
-          </div>
 
           {/* Main Message */}
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
