@@ -8,8 +8,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Registro Fornitori Qualificati | Qualified Supplier Registry",
-  description: "Piattaforma di registrazione per professionisti e fornitori qualificati. Registration platform for qualified professionals and suppliers.",
+  title: "Rete Professionisti Puglia | Investitori Stranieri",
+  description: "Piattaforma che connette professionisti locali qualificati con investitori stranieri interessati al mercato immobiliare pugliese.",
 };
 
 export default function RootLayout({
@@ -34,7 +34,7 @@ export default function RootLayout({
                       </svg>
                     </div>
                     <span className="font-semibold text-xl text-gray-800">
-                      Registro Fornitori
+                      PropertyPros Puglia
                     </span>
                   </div>
                   
