@@ -1,162 +1,122 @@
-// PATH: app/page.tsx
-'use client'
-import { useState, useEffect } from 'react'
+// PATH: app/layout.tsx
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./global.css";
+import { LanguageProvider } from './providers/language-provider';
+import { LanguageSelector } from './components/language-selector';
 
-export default function HomePage() {
-  const [language, setLanguage] = useState<'it' | 'en'>('en') // Default to English
-  
-  useEffect(() => {
-    // Detect browser language
-    const browserLang = navigator.language.toLowerCase()
-    if (browserLang.startsWith('it')) {
-      setLanguage('it')
-    } else {
-      setLanguage('en')
-    }
-  }, [])
-  
+const inter = Inter({ 
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "PropertyPros Puglia | Investitori Stranieri",
+  description: "Piattaforma che connette professionisti locali qualificati con investitori stranieri interessati al mercato immobiliare pugliese.",
+};
+
+function Navigation() {
   return (
-    <>
-      {/* Simple Hero - Immediate Choice */}
-      <section className="min-h-[80vh] bg-gradient-to-b from-blue-50 to-white flex items-center">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* Language Toggle - Top Right */}
-          <div className="absolute top-20 right-8">
-            <button 
-              onClick={() => setLanguage(language === 'it' ? 'en' : 'it')}
-              className="flex items-center space-x-2 px-3 py-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-all text-gray-700 font-medium"
-            >
-              <span className="text-2xl">{language === 'en' ? '🇬🇧' : '🇮🇹'}</span>
-              <span>{language === 'en' ? 'Italiano' : 'English'}</span>
-            </button>
-          </div>
+    <nav className="hidden md:flex space-x-6">
+      <a href="/how-it-works" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
+        How it Works
+      </a>
+      <a href="/about" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
+        About
+      </a>
+      <a href="/contact" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
+        Contact
+      </a>
+    </nav>
+  );
+}
 
-          {/* Main Message */}
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            {language === 'en' 
-              ? 'Your trusted bridge to property investment in Puglia'
-              : 'Il ponte di fiducia per il tuo investimento immobiliare in Puglia'
-            }
-          </h1>
-          
-          <p className="text-xl text-gray-700 mb-12 max-w-3xl mx-auto">
-            {language === 'en'
-              ? 'We connect foreign investors with verified local professionals for safe and transparent property purchases.'
-              : 'Mettiamo in contatto investitori stranieri con professionisti locali verificati per acquisti immobiliari sicuri e trasparenti.'
-            }
-          </p>
-
-          {/* The Choice */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
-            <h2 className="text-2xl font-semibold mb-8 text-gray-800">
-              {language === 'en' ? 'Who are you?' : 'Chi sei?'}
-            </h2>
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className={`${inter.className} antialiased`}>
+        <LanguageProvider>
+          <div className="min-h-screen bg-gray-50">
+            {/* Professional header */}
+            <header className="bg-white shadow-sm border-b border-gray-200">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center h-16">
+                  <div className="flex items-center space-x-8">
+                    {/* Logo/Brand - Professional */}
+                    <a href="/" className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-blue-800 rounded-lg flex items-center justify-center">
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                      </div>
+                      <span className="font-semibold text-xl text-gray-800">
+                        PropertyPros Puglia
+                      </span>
+                    </a>
+                    
+                    <Navigation />
+                  </div>
+                  
+                  {/* Right side - Language selector & Login */}
+                  <div className="flex items-center space-x-4">
+                    <LanguageSelector />
+                    
+                    {/* Login Button */}
+                    <button className="bg-blue-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-900 transition-all duration-200">
+                      Login
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </header>
             
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Buyer Option */}
-              <a 
-                href="/buyer" 
-                className="group bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-green-300"
-              >
-                <div className="text-6xl mb-4">🏡</div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-green-700">
-                  {language === 'en' ? 'I Want to Buy' : 'Voglio Comprare'}
-                </h3>
-                <p className="text-gray-700 mb-4">
-                  {language === 'en'
-                    ? "I'm a foreign investor interested in buying property in Puglia"
-                    : 'Sono un investitore straniero interessato ad acquistare proprietà in Puglia'
-                  }
-                </p>
-                <div className="text-green-600 font-semibold group-hover:underline">
-                  {language === 'en' ? 'Discover how we can help →' : 'Scopri come possiamo aiutarti →'}
+            {/* Main content */}
+            <main>
+              {children}
+            </main>
+            
+            {/* Professional Footer */}
+            <footer className="bg-gray-800 text-gray-300 mt-20">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div className="grid md:grid-cols-3 gap-8">
+                  <div>
+                    <h3 className="text-white font-semibold mb-4">Information</h3>
+                    <ul className="space-y-2">
+                      <li><a href="/about" className="hover:text-white transition-colors">About Us</a></li>
+                      <li><a href="/how-it-works" className="hover:text-white transition-colors">How it Works</a></li>
+                      <li><a href="/professional" className="hover:text-white transition-colors">For Professionals</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold mb-4">Support</h3>
+                    <ul className="space-y-2">
+                      <li><a href="/help" className="hover:text-white transition-colors">Help Center</a></li>
+                      <li><a href="/contact" className="hover:text-white transition-colors">Contact</a></li>
+                      <li><a href="/faq" className="hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold mb-4">Legal</h3>
+                    <ul className="space-y-2">
+                      <li><a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a></li>
+                      <li><a href="/terms" className="hover:text-white transition-colors">Terms of Service</a></li>
+                      <li><a href="/cookies" className="hover:text-white transition-colors">Cookie Policy</a></li>
+                    </ul>
+                  </div>
                 </div>
-              </a>
-
-              {/* Professional Option */}
-              <a 
-                href="/professional" 
-                className="group bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-blue-300"
-              >
-                <div className="text-6xl mb-4">💼</div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-blue-700">
-                  {language === 'en' ? "I'm a Professional" : 'Sono un Professionista'}
-                </h3>
-                <p className="text-gray-700 mb-4">
-                  {language === 'en'
-                    ? "I'm a surveyor, architect, lawyer, notary or real estate agency"
-                    : 'Sono un geometra, architetto, avvocato, notaio o agenzia immobiliare'
-                  }
-                </p>
-                <div className="text-blue-600 font-semibold group-hover:underline">
-                  {language === 'en' ? 'Join our network →' : 'Entra nella rete →'}
+                <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+                  <p className="text-sm">
+                    © 2024 PropertyPros Puglia. All rights reserved.
+                  </p>
                 </div>
-              </a>
-            </div>
+              </div>
+            </footer>
           </div>
-        </div>
-      </section>
-
-      {/* Trust Indicators */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div>
-              <div className="text-3xl font-bold text-gray-900">100%</div>
-              <div className="text-gray-600 mt-1">
-                {language === 'en' ? 'Verified Professionals' : 'Professionisti Verificati'}
-              </div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-gray-900">€5M+</div>
-              <div className="text-gray-600 mt-1">
-                {language === 'en' ? 'Transaction Value' : 'Valore Transazioni'}
-              </div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-gray-900">48h</div>
-              <div className="text-gray-600 mt-1">
-                {language === 'en' ? 'Response Guaranteed' : 'Risposta Garantita'}
-              </div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-gray-900">0€</div>
-              <div className="text-gray-600 mt-1">
-                {language === 'en' ? 'To Start' : 'Per Iniziare'}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How We Make Money - Transparency */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-6 text-gray-900">
-            {language === 'en' ? 'How It Works' : 'Come Funziona'}
-          </h2>
-          <div className="bg-blue-50 rounded-xl p-8">
-            <p className="text-lg text-gray-700">
-              {language === 'en'
-                ? '✅ Free for professionals during launch phase'
-                : '✅ Gratis per professionisti durante la fase di lancio'
-              }
-            </p>
-            <p className="text-lg text-gray-700 mt-2">
-              {language === 'en'
-                ? '✅ Small commission only on successfully completed transactions'
-                : '✅ Piccola commissione solo su transazioni completate con successo'
-              }
-            </p>
-            <p className="text-lg text-gray-700 mt-2">
-              {language === 'en'
-                ? '✅ Optional premium services for increased visibility'
-                : '✅ Servizi premium opzionali per maggiore visibilità'
-              }
-            </p>
-          </div>
-        </div>
-      </section>
-    </>
-  )
+        </LanguageProvider>
+      </body>
+    </html>
+  );
 }
