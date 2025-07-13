@@ -41,9 +41,12 @@ export default function ProfessionalPage() {
                 : 'Join the Apulink network of verified professionals assisting international investors with property purchases in Puglia.'
               }
             </p>
-            <button className="bg-sea text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-sea-dark transition-all duration-200">
-              {language === 'it' ? 'Registrati Gratuitamente' : 'Register for Free'}
-            </button>
+            <a 
+  href="/professional/register"
+  className="inline-block bg-sea text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-sea-dark transition-all duration-200"
+>
+  {language === 'it' ? 'Registrati Gratuitamente' : 'Register for Free'}
+</a>
           </div>
         </div>
       </section>
@@ -362,9 +365,12 @@ export default function ProfessionalPage() {
               : '5-minute registration. 48-hour approval. New clients within a week.'
             }
           </p>
-          <button className="bg-white text-sea px-10 py-4 rounded-lg font-bold text-lg hover:bg-stone-100 transition-all duration-200">
-            {language === 'it' ? 'Registrati Ora' : 'Register Now'}
-          </button>
+          <a 
+  href="/professional/register"
+  className="inline-block bg-white text-sea px-10 py-4 rounded-lg font-bold text-lg hover:bg-stone-100 transition-all duration-200"
+>
+  {language === 'it' ? 'Registrati Ora' : 'Register Now'}
+</a>
         </div>
       </section>
     </>
