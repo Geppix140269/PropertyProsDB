@@ -1,6 +1,6 @@
 // PATH: app/[locale]/page.tsx
 import { client } from '@/lib/sanity/client'
-import { translationsQuery, categoriesQuery, transformTranslations } from '@/lib/sanity/queries'
+import { translationsQuery, categoriesQuery, transformTranslations } from '@/lib/sanity/queries.js'
 
 type Locale = 'en' | 'it'
 
