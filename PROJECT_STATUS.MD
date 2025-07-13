@@ -74,7 +74,7 @@ A professional, bilingual (English/Italian) supplier registration platform with:
 
 ## 📍 CURRENT STATUS (UPDATE THIS SECTION)
 
-### Last Updated: July 13, 2025
+### Last Updated: July 13, 2025 - 2:30 PM
 
 ### ✅ Completed
 1. **Project Setup**
@@ -82,15 +82,17 @@ A professional, bilingual (English/Italian) supplier registration platform with:
    - Connected to Netlify for auto-deployment
    - Initial package.json with all dependencies
    - Added PROJECT_STATUS.md for session continuity
+   - Fixed Node.js version with .nvmrc file
 
 2. **Configuration Files**
-   - `package.json` - All dependencies configured
+   - `package.json` - All dependencies configured (added missing @sanity/vision)
    - `tsconfig.json` - TypeScript configuration
    - `tailwind.config.ts` - Custom theme with warm colors
    - `postcss.config.js` - PostCSS configuration
    - `.eslintrc.json` - ESLint configuration
    - `next.config.js` - Next.js configuration
    - `.env.local.example` - Environment variables template
+   - `.nvmrc` - Node version specification (18.17.0)
 
 3. **Root Layout & Styling**
    - `app/layout.tsx` - Beautiful root layout with:
@@ -99,6 +101,7 @@ A professional, bilingual (English/Italian) supplier registration platform with:
      - Language selector placeholder
      - Footer with social links
      - Fixed all apostrophes for deployment
+     - Added lang="en" attribute to fix build error
    - `app/globals.css` - Enhanced Tailwind styles with:
      - Custom animations
      - Glassmorphism effects
@@ -114,19 +117,19 @@ A professional, bilingual (English/Italian) supplier registration platform with:
 5. **Sanity CMS Integration**
    - `lib/sanity/client.ts` - Sanity client configuration
    - `lib/sanity/queries.ts` - GROQ queries for all content types
-   - `sanity.config.ts` - Sanity Studio configuration
+   - `sanity.config.ts` - Sanity Studio configuration with custom desk structure
    - `sanity/schemas/index.ts` - Schema exports
    - `sanity/schemas/category.ts` - Category schema (multilingual)
-   - Started setting up custom desk structure for better content organization
+   - `sanity/schemas/region.ts` - Region schema with tax/postal validation
+   - `sanity/schemas/translation.ts` - Translation schema with namespaces
+   - `app/studio/[[...index]]/page.tsx` - Studio placeholder page
 
 ### 🔄 In Progress
-- Creating remaining Sanity schemas (region.ts, translation.ts)
+- Fixing Netlify deployment errors
 - Setting up Sanity project on sanity.io
 
 ### 📋 Next Steps
-1. Complete Sanity schemas:
-   - `sanity/schemas/region.ts`
-   - `sanity/schemas/translation.ts`
+1. Wait for Netlify deployment to succeed
 2. Create Sanity project at sanity.io and get project ID
 3. Add environment variables to Netlify:
    - NEXT_PUBLIC_SANITY_PROJECT_ID
@@ -138,7 +141,9 @@ A professional, bilingual (English/Italian) supplier registration platform with:
 8. Connect form to Supabase
 
 ### 🐛 Known Issues
-- None currently
+- Initial deployment error due to missing Node version (FIXED)
+- Build errors with missing dependencies (FIXED)
+- HTML lang attribute error (FIXED)
 
 ### 📝 Notes for Next Session
 - Remember to include PATH comments in all files
@@ -149,19 +154,21 @@ A professional, bilingual (English/Italian) supplier registration platform with:
 - NO apostrophes in JSX - use HTML entities or backticks
 - Need to create Sanity project at sanity.io before the app can fetch content
 - Environment variables must be added to Netlify for production
+- Studio page temporarily simplified until Sanity is properly configured
 
 ### 🔗 Important Links
-- **GitHub Repo**: [your-repo-url]
-- **Netlify Site**: [your-netlify-url]
+- **GitHub Repo**: https://github.com/Geppix140269/PropertyProsDB
+- **Netlify Site**: [pending successful deployment]
 - **Sanity Project**: [to be created at sanity.io]
 - **Supabase Project**: [to be created at supabase.com]
 
-### 📊 Project Progress: ~40% Complete
+### 📊 Project Progress: ~45% Complete
 - ✅ Project structure and configuration
 - ✅ Beautiful responsive layout
 - ✅ Internationalization routing
 - ✅ Sanity integration prepared
-- ⏳ Sanity content schemas (70% done)
+- ✅ All content schemas defined
+- ⏳ Deployment fixes in progress
 - ❌ Sanity project setup
 - ❌ Supabase setup
 - ❌ Registration form
