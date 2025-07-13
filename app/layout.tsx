@@ -38,16 +38,16 @@ export default function RootLayout({
                     </span>
                   </div>
                   
-                  {/* Navigation - Italian first */}
+                  {/* Navigation - English first */}
                   <nav className="hidden md:flex space-x-6">
                     <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
-                      Come Funziona
+                      How it Works
                     </a>
                     <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
-                      Requisiti
+                      About
                     </a>
                     <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
-                      Contatti
+                      Contact
                     </a>
                   </nav>
                 </div>
@@ -62,7 +62,7 @@ export default function RootLayout({
                   
                   {/* Login Button */}
                   <button className="bg-blue-800 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-900 transition-all duration-200">
-                    Accedi / Login
+                    Login
                   </button>
                 </div>
               </div>
@@ -79,33 +79,33 @@ export default function RootLayout({
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
               <div className="grid md:grid-cols-3 gap-8">
                 <div>
-                  <h3 className="text-white font-semibold mb-4">Informazioni</h3>
+                  <h3 className="text-white font-semibold mb-4">Information</h3>
                   <ul className="space-y-2">
-                    <li><a href="#" className="hover:text-white transition-colors">Chi Siamo</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Come Funziona</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Requisiti</a></li>
+                    <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
+                    <li><a href="#" className="hover:text-white transition-colors">How it Works</a></li>
+                    <li><a href="#" className="hover:text-white transition-colors">For Professionals</a></li>
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold mb-4">Supporto</h3>
+                  <h3 className="text-white font-semibold mb-4">Support</h3>
                   <ul className="space-y-2">
-                    <li><a href="#" className="hover:text-white transition-colors">Centro Assistenza</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Contatti</a></li>
+                    <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
+                    <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
                     <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold mb-4">Legale</h3>
+                  <h3 className="text-white font-semibold mb-4">Legal</h3>
                   <ul className="space-y-2">
                     <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Termini di Servizio</a></li>
+                    <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
                     <li><a href="#" className="hover:text-white transition-colors">Cookie Policy</a></li>
                   </ul>
                 </div>
               </div>
               <div className="border-t border-gray-700 mt-8 pt-8 text-center">
                 <p className="text-sm">
-                  © 2024 Registro Fornitori. Tutti i diritti riservati. | All rights reserved.
+                  © 2024 PropertyPros Puglia. All rights reserved.
                 </p>
               </div>
             </div>
