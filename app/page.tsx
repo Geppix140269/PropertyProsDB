@@ -7,21 +7,28 @@ export default function HomePage() {
   
   return (
     <>
-      {/* Simple Hero - Immediate Choice */}
-      <section className="min-h-[80vh] bg-gradient-to-b from-blue-50 to-white flex items-center">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Hero Section with Apulink Branding */}
+      <section className="min-h-[80vh] bg-gradient-to-b from-stone-50 to-white flex items-center relative overflow-hidden">
+        {/* Decorative arch pattern */}
+        <div className="absolute top-0 right-0 w-1/2 h-full opacity-5">
+          <svg viewBox="0 0 400 800" className="w-full h-full">
+            <path d="M0 0 Q 200 400 0 800" fill="none" stroke="#E2725B" strokeWidth="100"/>
+          </svg>
+        </div>
+        
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           {/* Main Message */}
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="font-playfair text-4xl md:text-6xl font-bold text-stone-800 mb-6">
             {t(
-              'Your trusted bridge to property investment in Puglia',
-              'Il ponte di fiducia per il tuo investimento immobiliare in Puglia'
+              'Your Bridge to Property Investment in Puglia',
+              'Il Tuo Ponte per Investimenti Immobiliari in Puglia'
             )}
           </h1>
           
-          <p className="text-xl text-gray-700 mb-12 max-w-3xl mx-auto">
+          <p className="text-xl text-stone-600 mb-12 max-w-3xl mx-auto">
             {t(
-              'We connect foreign investors with verified local professionals for safe and transparent property purchases.',
-              'Mettiamo in contatto investitori stranieri con professionisti locali verificati per acquisti immobiliari sicuri e trasparenti.'
+              'Apulink connects foreign investors with verified local professionals for safe and transparent property purchases.',
+              'Apulink connette investitori stranieri con professionisti locali verificati per acquisti immobiliari sicuri e trasparenti.'
             )}
           </p>
 
@@ -35,19 +42,19 @@ export default function HomePage() {
               {/* Buyer Option */}
               <a 
                 href="/buyer" 
-                className="group bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-green-300"
+                className="group bg-gradient-to-br from-terracotta/10 to-terracotta/5 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-terracotta/30"
               >
                 <div className="text-6xl mb-4">🏡</div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-green-700">
+                <h3 className="font-playfair text-2xl font-bold mb-3 text-stone-800 group-hover:text-terracotta">
                   {t('I Want to Buy', 'Voglio Comprare')}
                 </h3>
-                <p className="text-gray-700 mb-4">
+                <p className="text-stone-600 mb-4">
                   {t(
                     "I'm a foreign investor interested in buying property in Puglia",
                     'Sono un investitore straniero interessato ad acquistare proprietà in Puglia'
                   )}
                 </p>
-                <div className="text-green-600 font-semibold group-hover:underline">
+                <div className="text-terracotta font-semibold group-hover:underline">
                   {t('Discover how we can help →', 'Scopri come possiamo aiutarti →')}
                 </div>
               </a>
@@ -55,19 +62,19 @@ export default function HomePage() {
               {/* Professional Option */}
               <a 
                 href="/professional" 
-                className="group bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-blue-300"
+                className="group bg-gradient-to-br from-sea/10 to-sea/5 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-sea/30"
               >
                 <div className="text-6xl mb-4">💼</div>
-                <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-blue-700">
+                <h3 className="font-playfair text-2xl font-bold mb-3 text-stone-800 group-hover:text-sea">
                   {t("I'm a Professional", 'Sono un Professionista')}
                 </h3>
-                <p className="text-gray-700 mb-4">
+                <p className="text-stone-600 mb-4">
                   {t(
                     "I'm a surveyor, architect, lawyer, notary or real estate agency",
                     'Sono un geometra, architetto, avvocato, notaio o agenzia immobiliare'
                   )}
                 </p>
-                <div className="text-blue-600 font-semibold group-hover:underline">
+                <div className="text-sea font-semibold group-hover:underline">
                   {t('Join our network →', 'Entra nella rete →')}
                 </div>
               </a>
@@ -77,30 +84,30 @@ export default function HomePage() {
       </section>
 
       {/* Trust Indicators */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-stone-100">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div>
-              <div className="text-3xl font-bold text-gray-900">100%</div>
-              <div className="text-gray-600 mt-1">
+              <div className="font-playfair text-3xl font-bold text-terracotta">100%</div>
+              <div className="text-stone-600 mt-1">
                 {t('Verified Professionals', 'Professionisti Verificati')}
               </div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-gray-900">€5M+</div>
-              <div className="text-gray-600 mt-1">
+              <div className="font-playfair text-3xl font-bold text-terracotta">€5M+</div>
+              <div className="text-stone-600 mt-1">
                 {t('Transaction Value', 'Valore Transazioni')}
               </div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-gray-900">48h</div>
-              <div className="text-gray-600 mt-1">
+              <div className="font-playfair text-3xl font-bold text-terracotta">48h</div>
+              <div className="text-stone-600 mt-1">
                 {t('Response Guaranteed', 'Risposta Garantita')}
               </div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-gray-900">0€</div>
-              <div className="text-gray-600 mt-1">
+              <div className="font-playfair text-3xl font-bold text-terracotta">0€</div>
+              <div className="text-stone-600 mt-1">
                 {t('To Start', 'Per Iniziare')}
               </div>
             </div>
@@ -111,23 +118,23 @@ export default function HomePage() {
       {/* How We Make Money - Transparency */}
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-6 text-gray-900">
+          <h2 className="font-playfair text-2xl font-bold mb-6 text-stone-800">
             {t('How It Works', 'Come Funziona')}
           </h2>
-          <div className="bg-blue-50 rounded-xl p-8">
-            <p className="text-lg text-gray-700">
+          <div className="bg-terracotta/5 rounded-xl p-8 border border-terracotta/20">
+            <p className="text-lg text-stone-700">
               {t(
                 '✅ Free for professionals during launch phase',
                 '✅ Gratis per professionisti durante la fase di lancio'
               )}
             </p>
-            <p className="text-lg text-gray-700 mt-2">
+            <p className="text-lg text-stone-700 mt-2">
               {t(
                 '✅ Small commission only on successfully completed transactions',
                 '✅ Piccola commissione solo su transazioni completate con successo'
               )}
             </p>
-            <p className="text-lg text-gray-700 mt-2">
+            <p className="text-lg text-stone-700 mt-2">
               {t(
                 '✅ Optional premium services for increased visibility',
                 '✅ Servizi premium opzionali per maggiore visibilità'
