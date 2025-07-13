@@ -74,7 +74,7 @@ A professional, bilingual (English/Italian) supplier registration platform with:
 
 ## 📍 CURRENT STATUS (UPDATE THIS SECTION)
 
-### Last Updated: July 14, 2025 - 12:30 AM
+### Last Updated: July 14, 2025 - 1:30 AM
 
 ### ✅ Completed
 1. **Project Setup**
@@ -123,48 +123,57 @@ A professional, bilingual (English/Italian) supplier registration platform with:
    - Italian-first approach with professional tone
    - Removed all startup/tech vibes for trustworthy appearance
 
+8. **Two-Sided Marketplace Implementation** 🎯
+   - Created choice-based homepage (Buyer vs Professional)
+   - Built dedicated `/buyer` page with complete buyer journey
+   - Built dedicated `/professional` page with registration benefits
+   - Both pages feature language toggle (EN/IT)
+   - Clear monetization strategy revealed
+
 ### 🔄 In Progress
-- Planning registration form implementation
-- Preparing Supabase database design
+- Planning registration forms for both user types
+- Designing database schema for two-sided marketplace
 
 ### 📋 Next Steps
-1. **Create Registration Form** (Priority!)
-   - Multi-step form for professional details
-   - File upload for portfolio/references
+1. **Create Registration Forms**
+   - Buyer inquiry form (simpler)
+   - Professional registration form (detailed)
    - Form validation with Zod
    
 2. **Set up Supabase**
    - Create account and project
-   - Design professionals table schema
+   - Design tables: professionals, buyers, inquiries, matches
    - Set up authentication
-   - Connect form to database
+   - Connect forms to database
 
 3. **Essential Pages**
-   - /come-funziona (How it works)
+   - /come-funziona (How it works - detailed)
    - /chi-siamo (About us)
    - /faq (FAQ)
    - /privacy (Privacy policy)
+   - /termini (Terms of service)
 
-4. **Set up Sanity CMS**
-   - Create Sanity project
-   - Add environment variables to Netlify
-   - Enable content management
+4. **Admin Dashboard**
+   - View registrations
+   - Match buyers with professionals
+   - Track commissions
 
 5. **Email System**
-   - Registration confirmation emails
-   - Admin notifications
-   - Email templates
+   - Registration confirmations
+   - Match notifications
+   - Status updates
 
 ### 🐛 Known Issues
 - Sanity integration ready but not configured (needs project ID)
 - Internationalization disabled until Sanity is set up
+- Forms using client-side state (temporary solution)
 
 ### 📝 Notes for Next Session
-- Site now clearly communicates its purpose
-- Focus is on Puglia professionals serving foreign investors
-- Registration form is the critical next step
-- Database schema should include: professional type, location, languages, experience
-- Consider adding testimonials section later
+- Platform now clearly serves TWO audiences
+- Monetization model: 10-15% commission on successful deals
+- Free for professionals to join (removes barriers)
+- Consider premium features for phase 2
+- Database needs to track: matches, conversations, deals, commissions
 
 ### 🔗 Important Links
 - **GitHub Repo**: https://github.com/Geppix140269/PropertyProsDB
@@ -172,19 +181,43 @@ A professional, bilingual (English/Italian) supplier registration platform with:
 - **Sanity Project**: [to be created at sanity.io]
 - **Supabase Project**: [to be created at supabase.com]
 
-### 📊 Project Progress: ~55% Complete
+### 📊 Project Progress: ~65% Complete
 - ✅ Project structure and configuration
 - ✅ Professional design and messaging
 - ✅ Clear value proposition
-- ✅ Target audience defined
-- ⏳ Registration form (next priority)
+- ✅ Target audiences defined (buyers + professionals)
+- ✅ User journey pages created
+- ✅ Monetization strategy defined
+- ⏳ Registration forms (next priority)
 - ❌ Database setup
 - ❌ CMS configuration
 - ❌ Email system
-- ❌ Additional pages
+- ❌ Admin dashboard
+- ❌ Payment processing
 
-### 🎯 Platform Purpose (Clarified)
-**PropertyPros Puglia** connects foreign real estate investors with qualified local professionals (geometri, architects, lawyers, notaries, real estate agencies) throughout Puglia. The platform solves the trust and communication gap between international buyers and Italian professionals.
+### 💰 Monetization Strategy (Defined)
+**Phase 1 - Launch (Current)**
+- FREE for professionals to register
+- FREE for buyers to browse
+- Focus on building network
+
+**Phase 2 - Transaction Fees**
+- 10-15% commission on successful deals
+- Paid by professional (built into their pricing)
+- Only charged on completion
+
+**Phase 3 - Premium Services**
+- Featured listings for professionals
+- Priority matching
+- Marketing support
+- Virtual tour services
+
+### 🎯 Platform Purpose (Final)
+**PropertyPros Puglia** is a two-sided marketplace connecting:
+1. **Foreign property buyers** seeking trusted assistance in Puglia
+2. **Local professionals** (geometri, architects, lawyers, notaries) seeking international clients
+
+The platform solves trust, language, and bureaucracy barriers while monetizing through success-based commissions.
 
 ### 🐛 Known Issues
 - Initial deployment error due to missing Node version (FIXED)
