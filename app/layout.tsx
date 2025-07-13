@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={`${inter.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="font-sans antialiased">
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
           {/* Warm gradient background with subtle pattern */}
