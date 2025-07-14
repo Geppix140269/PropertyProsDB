@@ -1,33 +1,24 @@
-// lib/supabase/client.ts
-import { createBrowserClient } from '@supabase/ssr'
-import { SupabaseClient } from '@supabase/supabase-js'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 
-// Create a singleton instance
-let supabase: SupabaseClient | null = null
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
+export const supabase = createSupabaseClient(supabaseUrl, supabaseAnonKey)
+
+// For backward compatibility
 export function createClient() {
-  if (supabase) return supabase
-  
-  supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
-  
   return supabase
 }
 
-// Helper function to generate anonymous username for surveyors
+// Helper function to generate anonymous username
 function generateAnonymousUsername(city: string): string {
-  const cityCode = city.substring(0, 2).toUpperCase()
-  const randomNum = Math.floor(Math.random() * 1000).toString().padStart(3, '0')
-  return `Surveyor_${cityCode}_${randomNum}`
+  const code = city.substring(0, 2).toUpperCase()
+  const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0')
+  return `Surveyor_${code}_${random}`
 }
 
-// Submit buyer inquiry (works for both general inquiries and survey requests)
+// Submit buyer inquiry
 export async function submitBuyerInquiry(data: any) {
-  const supabase = createClient()
-  
-  // Map the form data to database structure
   const inquiryData = {
     first_name: data.first_name || data.firstName,
     last_name: data.last_name || data.lastName,
@@ -53,7 +44,7 @@ export async function submitBuyerInquiry(data: any) {
     max_budget: data.max_budget,
     created_at: new Date().toISOString()
   }
-  
+
   const { data: inquiry, error } = await supabase
     .from('inquiries')
     .insert([inquiryData])
@@ -68,11 +59,8 @@ export async function submitBuyerInquiry(data: any) {
   return { success: true, data: inquiry }
 }
 
-// Submit professional registration (works for both general professionals and surveyors)
+// Submit professional registration
 export async function submitProfessionalRegistration(data: any) {
-  const supabase = createClient()
-  
-  // Map the form data to database structure
   const professionalData = {
     first_name: data.first_name || data.firstName,
     last_name: data.last_name || data.lastName,
@@ -96,12 +84,16 @@ export async function submitProfessionalRegistration(data: any) {
     anonymous_username: data.anonymous_username,
     created_at: new Date().toISOString()
   }
-  
-  // If registering as a surveyor, generate anonymous username
-  if (professionalData.is_surveyor && professionalData.service_areas && professionalData.service_areas.length > 0) {
-    professionalData.anonymous_username = generateAnonymousUsername(professionalData.service_areas[0])
+
+  if (
+    professionalData.is_surveyor &&
+    professionalData.service_areas?.length > 0
+  ) {
+    professionalData.anonymous_username = generateAnonymousUsername(
+      professionalData.service_areas[0]
+    )
   }
-  
+
   const { data: professional, error } = await supabase
     .from('professionals')
     .insert([professionalData])
@@ -116,17 +108,13 @@ export async function submitProfessionalRegistration(data: any) {
   return { success: true, data: professional }
 }
 
-// Get inquiries for a professional (including survey requests)
-export async function getProfessionalInquiries(professionalId: string, isSurveyor: boolean = false) {
-  const supabase = createClient()
-  
-  let query = supabase
+// Get inquiries (filtered by is_survey_request)
+export async function getProfessionalInquiries(professionalId: string, isSurveyor = false) {
+  const { data, error } = await supabase
     .from('inquiries')
     .select('*')
     .eq('is_survey_request', isSurveyor)
     .order('created_at', { ascending: false })
-  
-  const { data, error } = await query
 
   if (error) {
     console.error('Error fetching inquiries:', error)
@@ -136,7 +124,7 @@ export async function getProfessionalInquiries(professionalId: string, isSurveyo
   return data
 }
 
-// Submit a quote for a survey request
+// Submit a quote
 export async function submitQuote(data: {
   inquiry_id: string
   professional_id: string
@@ -146,14 +134,9 @@ export async function submitQuote(data: {
   includes_site_visit: boolean
   includes_cad_drawings: boolean
 }) {
-  const supabase = createClient()
-  
   const { data: quote, error } = await supabase
     .from('quotes')
-    .insert([{
-      ...data,
-      created_at: new Date().toISOString()
-    }])
+    .insert([{ ...data, created_at: new Date().toISOString() }])
     .select()
     .single()
 
@@ -165,10 +148,8 @@ export async function submitQuote(data: {
   return quote
 }
 
-// Get quotes for a specific inquiry
+// Get all quotes for an inquiry
 export async function getInquiryQuotes(inquiryId: string) {
-  const supabase = createClient()
-  
   const { data, error } = await supabase
     .from('quotes')
     .select(`
@@ -191,64 +172,40 @@ export async function getInquiryQuotes(inquiryId: string) {
   return data
 }
 
-// Check if message contains contact information
+// Basic contact info filter
 export function checkForContactInfo(message: string): boolean {
-  // Check for email patterns
   const emailPattern = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/
-  
-  // Check for phone patterns (various formats)
   const phonePatterns = [
-    /\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/, // 123-456-7890 or 123.456.7890
-    /\b\d{10}\b/, // 1234567890
-    /\b\+\d{1,3}\s?\d{3,14}\b/, // +39 123 4567890
-    /\b\(\d{3}\)\s?\d{3}[-.]?\d{4}\b/ // (123) 456-7890
+    /\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/,
+    /\b\d{10}\b/,
+    /\b\+\d{1,3}\s?\d{3,14}\b/,
+    /\b\(\d{3}\)\s?\d{3}[-.]?\d{4}\b/
   ]
-  
-  // Check for common contact keywords
-  const contactKeywords = [
-    'whatsapp', 'telegram', 'skype', 'email me', 'call me', 
-    'contact me', 'reach me', '@gmail', '@yahoo', '@hotmail'
-  ]
-  
-  const lowerMessage = message.toLowerCase()
-  
-  // Check for email
-  if (emailPattern.test(message)) return true
-  
-  // Check for phone numbers
-  for (const pattern of phonePatterns) {
-    if (pattern.test(message)) return true
-  }
-  
-  // Check for keywords
-  for (const keyword of contactKeywords) {
-    if (lowerMessage.includes(keyword)) return true
-  }
-  
+  const keywords = ['whatsapp', 'telegram', 'skype', 'email me', 'call me', 'contact me', 'reach me', '@gmail', '@yahoo', '@hotmail']
+
+  const text = message.toLowerCase()
+
+  if (emailPattern.test(text)) return true
+  if (phonePatterns.some(p => p.test(text))) return true
+  if (keywords.some(k => text.includes(k))) return true
+
   return false
 }
 
-// Flag a message if it contains contact information
+// Flag message in DB
 export async function flagMessageIfNeeded(messageId: string, content: string) {
-  if (checkForContactInfo(content)) {
-    const supabase = createClient()
-    
-    const { error } = await supabase
-      .from('messages')
-      .update({ flagged: true, flag_reason: 'Contains contact information' })
-      .eq('id', messageId)
-    
-    if (error) {
-      console.error('Error flagging message:', error)
-    }
-    
-    return true
-  }
-  
-  return false
+  if (!checkForContactInfo(content)) return false
+
+  const { error } = await supabase
+    .from('messages')
+    .update({ flagged: true, flag_reason: 'Contains contact information' })
+    .eq('id', messageId)
+
+  if (error) console.error('Error flagging message:', error)
+  return true
 }
 
-// Survey-specific functions (for compatibility with existing code)
+// Survey-specific compatibility wrappers
 export async function submitSurveyRequest(data: any) {
   return submitBuyerInquiry({
     ...data,
@@ -279,8 +236,6 @@ export async function registerSurveyor(data: any) {
 
 // Get survey requests
 export async function getSurveyRequests() {
-  const supabase = createClient()
-  
   const { data, error } = await supabase
     .from('inquiries')
     .select('*')
@@ -291,10 +246,8 @@ export async function getSurveyRequests() {
   return data
 }
 
-// Get surveyors
+// Get registered surveyors
 export async function getSurveyors() {
-  const supabase = createClient()
-  
   const { data, error } = await supabase
     .from('professionals')
     .select('*')
