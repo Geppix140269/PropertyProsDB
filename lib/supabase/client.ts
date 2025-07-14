@@ -24,101 +24,96 @@ function generateAnonymousUsername(city: string): string {
 }
 
 // Submit buyer inquiry (works for both general inquiries and survey requests)
-export async function submitBuyerInquiry(data: {
-  // Contact Information
-  first_name: string
-  last_name: string
-  email: string
-  phone: string
-  
-  // Property/Survey Information
-  property_type?: string
-  budget?: string
-  location?: string
-  timeline?: string
-  has_property?: string
-  additional_details?: string
-  
-  // Survey-specific fields
-  is_survey_request?: boolean
-  property_address?: string
-  property_city?: string
-  property_province?: string
-  cadastral_details?: string
-  survey_types?: string[]
-  urgency?: string
-  max_budget?: string
-}) {
+export async function submitBuyerInquiry(data: any) {
   const supabase = createClient()
+  
+  // Map the form data to database structure
+  const inquiryData = {
+    first_name: data.first_name || data.firstName,
+    last_name: data.last_name || data.lastName,
+    email: data.email,
+    phone: data.phone,
+    nationality: data.nationality,
+    preferred_language: data.preferred_language || data.preferredLanguage,
+    property_types: data.property_types || data.propertyType || [],
+    budget_range: data.budget_range || data.budget,
+    preferred_locations: data.preferred_locations || data.locations || [],
+    timeline: data.timeline,
+    purchase_purpose: data.purchase_purpose || data.purpose,
+    has_visited_puglia: data.has_visited_puglia || data.hasVisitedPuglia || false,
+    needs_financing: data.needs_financing || data.needsFinancing || false,
+    additional_notes: data.additional_notes || data.additionalNotes || '',
+    is_survey_request: data.is_survey_request || false,
+    property_address: data.property_address,
+    property_city: data.property_city,
+    property_province: data.property_province,
+    cadastral_details: data.cadastral_details,
+    survey_types: data.survey_types,
+    urgency: data.urgency,
+    max_budget: data.max_budget,
+    created_at: new Date().toISOString()
+  }
   
   const { data: inquiry, error } = await supabase
     .from('inquiries')
-    .insert([{
-      ...data,
-      is_survey_request: data.is_survey_request || false,
-      created_at: new Date().toISOString()
-    }])
+    .insert([inquiryData])
     .select()
     .single()
 
   if (error) {
     console.error('Error submitting inquiry:', error)
-    throw error
+    return { success: false, error }
   }
 
-  return inquiry
+  return { success: true, data: inquiry }
 }
 
 // Submit professional registration (works for both general professionals and surveyors)
-export async function submitProfessionalRegistration(data: {
-  // Basic Information
-  first_name: string
-  last_name: string
-  email: string
-  phone: string
-  
-  // Professional Information
-  profession_type: string
-  years_experience: string
-  company_name?: string
-  services_offered: string[]
-  service_areas: string[]
-  
-  // Additional Information
-  certifications?: string
-  languages?: string[]
-  portfolio_url?: string
-  linkedin_url?: string
-  bio?: string
-  
-  // Surveyor-specific fields
-  is_surveyor?: boolean
-  survey_types?: string[]
-  anonymous_username?: string
-}) {
+export async function submitProfessionalRegistration(data: any) {
   const supabase = createClient()
   
+  // Map the form data to database structure
+  const professionalData = {
+    first_name: data.first_name || data.firstName,
+    last_name: data.last_name || data.lastName,
+    email: data.email,
+    phone: data.phone,
+    profession: data.profession || data.profession_type,
+    company_name: data.company_name || data.companyName,
+    vat_number: data.vat_number || data.vatNumber,
+    professional_license: data.professional_license || data.professionalLicense,
+    years_experience: data.years_experience || data.yearsExperience,
+    website: data.website,
+    services: data.services || data.services_offered || [],
+    languages: data.languages || [],
+    service_areas: data.service_areas || data.serviceAreas || [],
+    max_distance: data.max_distance || data.maxDistance || '50',
+    clients_served: data.clients_served || data.clientsServed,
+    specializations: data.specializations || [],
+    bio: data.bio,
+    is_surveyor: data.is_surveyor || false,
+    survey_types: data.survey_types || [],
+    anonymous_username: data.anonymous_username,
+    created_at: new Date().toISOString()
+  }
+  
   // If registering as a surveyor, generate anonymous username
-  if (data.is_surveyor && data.service_areas && data.service_areas.length > 0) {
-    data.anonymous_username = generateAnonymousUsername(data.service_areas[0])
+  if (professionalData.is_surveyor && professionalData.service_areas && professionalData.service_areas.length > 0) {
+    professionalData.anonymous_username = generateAnonymousUsername(professionalData.service_areas[0])
   }
   
   const { data: professional, error } = await supabase
     .from('professionals')
-    .insert([{
-      ...data,
-      is_surveyor: data.is_surveyor || false,
-      created_at: new Date().toISOString()
-    }])
+    .insert([professionalData])
     .select()
     .single()
 
   if (error) {
     console.error('Error registering professional:', error)
-    throw error
+    return { success: false, error }
   }
 
-  return professional
+  return { success: true, data: professional }
 }
 
 // Get inquiries for a professional (including survey requests)
