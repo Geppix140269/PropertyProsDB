@@ -1,63 +1,93 @@
-// components/home/SecurityFeatures.tsx
+// components/home/HowItWorks.tsx
 'use client'
 
-import { useLanguage } from '@/app/providers/language-provider'
+import { motion } from 'framer-motion'
 
-export default function SecurityFeatures() {
-  const { t } = useLanguage()
-
-  const features = [
-    {
-      icon: '🙈',
-      title: t('Anonymous Messaging', 'Messaggistica Anonima'),
-      desc: t(
-        'No personal contact info is shown until payment is complete.',
-        'Nessun contatto viene mostrato fino al pagamento.'
-      ),
-      color: 'bg-orange-100 text-orange-600'
-    },
-    {
-      icon: '🧠',
-      title: t('AI Moderation', 'Moderazione Automatica'),
-      desc: t(
-        'Our system blocks message attempts to share phone, email, or links.',
-        'Blocchiamo messaggi con numeri, email o link prima del pagamento.'
-      ),
-      color: 'bg-blue-100 text-blue-600'
-    },
-    {
-      icon: '💳',
-      title: t('Secure Payments', 'Pagamenti Sicuri'),
-      desc: t(
-        'Funds are held until survey is delivered and confirmed.',
-        'Il pagamento viene trattenuto fino alla conferma del servizio.'
-      ),
-      color: 'bg-green-100 text-green-600'
-    }
-  ]
+export default function HowItWorks() {
+  const steps = {
+    buyer: [
+      'Submit Request',
+      'Receive Quotes',
+      'Message & Choose',
+      'Pay & Connect',
+    ],
+    surveyor: [
+      'Register Free',
+      'Receive Requests',
+      'Send Quotes',
+      'Get Paid',
+    ],
+  }
 
   return (
-    <section className="bg-stone-50 py-20 px-6">
+    <section className="bg-gray-50 py-20 px-6 sm:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-center text-stone-800 mb-16">
-          {t('Safe & Secure Platform', 'Piattaforma Sicura')}
+        <h2 className="text-center text-3xl sm:text-4xl font-light text-gray-900 mb-16">
+          How It <strong className="font-bold">Works</strong>
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-10">
-          {features.map((f, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-xl p-8 shadow-lg text-center flex flex-col items-center"
-            >
-              <div
-                className={`w-14 h-14 ${f.color} rounded-full text-2xl flex items-center justify-center mb-4`}
-              >
-                {f.icon}
-              </div>
-              <h3 className="font-semibold text-stone-800 mb-2">{f.title}</h3>
-              <p className="text-stone-600 text-sm">{f.desc}</p>
-            </div>
-          ))}
+        <div className="grid md:grid-cols-2 gap-16">
+          <div>
+            <h3 className="text-xl font-semibold text-orange-600 mb-4">
+              For Buyers
+            </h3>
+            <ol className="space-y-6">
+              {steps.buyer.map((step, i) => (
+                <motion.li
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.2, duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="relative pl-10 text-gray-800"
+                >
+                  <span className="absolute left-0 top-0 w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">
+                    {i + 1}
+                  </span>
+                  <strong>{step}</strong>
+                  <p className="text-sm text-gray-600">
+                    {[
+                      'Tell us what you need and where.',
+                      'Get quotes from verified professionals.',
+                      'Ask questions before you choose.',
+                      'Pay securely and unlock contact details.',
+                    ][i]}
+                  </p>
+                </motion.li>
+              ))}
+            </ol>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold text-blue-600 mb-4">
+              For Surveyors
+            </h3>
+            <ol className="space-y-6">
+              {steps.surveyor.map((step, i) => (
+                <motion.li
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.2, duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="relative pl-10 text-gray-800"
+                >
+                  <span className="absolute left-0 top-0 w-6 h-6 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center font-bold">
+                    {i + 1}
+                  </span>
+                  <strong>{step}</strong>
+                  <p className="text-sm text-gray-600">
+                    {[
+                      'Create your profile and choose areas.',
+                      'Get notified of matching projects.',
+                      'Send offers and answer questions.',
+                      'Get paid after buyer selects you.',
+                    ][i]}
+                  </p>
+                </motion.li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
     </section>
