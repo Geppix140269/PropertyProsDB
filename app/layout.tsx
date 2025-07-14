@@ -1,4 +1,5 @@
 // PATH: app/layout.tsx
+import TrulloChatbot from '@/components/TrulloChatbot'
 import type { Metadata } from "next";
 import { Playfair_Display, Open_Sans } from "next/font/google";
 import "./global.css";
@@ -129,6 +130,7 @@ export default function RootLayout({
             </footer>
           </div>
         </LanguageProvider>
+        <TrulloChatbot />
       </body>
     </html>
   );
