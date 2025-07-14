@@ -1,69 +1,90 @@
 // components/home/HowItWorks.tsx
 'use client'
 
-import { useLanguage } from '@/app/providers/language-provider'
+import { motion } from 'framer-motion'
 
 export default function HowItWorks() {
-  const { t } = useLanguage()
-
-  const buyerSteps = [
-    [t('Submit Request', 'Invia Richiesta'), t('Tell us what you need and where.', 'Dicci cosa ti serve e dove.')],
-    [t('Receive Quotes', 'Ricevi Preventivi'), t('Compare offers from verified surveyors.', 'Confronta offerte da geometri verificati.')],
-    [t('Chat Anonymously', 'Chat Anonimamente'), t('Ask questions, clarify scope securely.', 'Fai domande e chiarisci in modo sicuro.')],
-    [t('Pay & Connect', 'Paga e Connettiti'), t('Pay securely, get full contact details.', 'Paga in sicurezza, ricevi i contatti.')]  
-  ]
-
-  const surveyorSteps = [
-    [t('Register Free', 'Registrati Gratis'), t('Create your profile and choose areas.', 'Crea il tuo profilo e scegli le zone.')],
-    [t('Get Requests', 'Ricevi Richieste'), t('See new jobs matching your zone.', 'Vedi nuovi lavori nella tua zona.')],
-    [t('Send Quotes', 'Invia Preventivi'), t('Submit offers and respond to questions.', 'Invia offerte e rispondi ai clienti.')],
-    [t('Get Paid', 'Ricevi Pagamento'), t('90% released when job confirmed.', '90% versato alla conferma.')]  
-  ]
+  const steps = {
+    buyer: [
+      'Submit Request',
+      'Receive Quotes',
+      'Message & Choose',
+      'Pay & Connect',
+    ],
+    surveyor: [
+      'Register Free',
+      'Receive Requests',
+      'Send Quotes',
+      'Get Paid',
+    ],
+  }
 
   return (
-    <section className="bg-gray-50 py-20 px-6">
+    <section className="bg-gray-50 py-20 px-6 sm:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-center text-stone-800 mb-16">
-          {t('How It Works', 'Come Funziona')}
+        <h2 className="text-center text-3xl sm:text-4xl font-light text-gray-900 mb-16">
+          How It <strong className="font-bold">Works</strong>
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Buyer Flow */}
+        <div className="grid md:grid-cols-2 gap-16">
           <div>
-            <h3 className="text-2xl font-bold text-orange-600 mb-6">
-              {t('For Buyers', 'Per Acquirenti')}
+            <h3 className="text-xl font-semibold text-orange-600 mb-4">
+              For Buyers
             </h3>
             <ol className="space-y-6">
-              {buyerSteps.map(([title, desc], idx) => (
-                <li key={idx} className="flex items-start space-x-4">
-                  <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-600 font-bold flex items-center justify-center">
-                    {idx + 1}
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-stone-800">{title}</h4>
-                    <p className="text-sm text-stone-600">{desc}</p>
-                  </div>
-                </li>
+              {steps.buyer.map((step, i) => (
+                <motion.li
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.2, duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="relative pl-10 text-gray-800"
+                >
+                  <span className="absolute left-0 top-0 w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">
+                    {i + 1}
+                  </span>
+                  <strong>{step}</strong>
+                  <p className="text-sm text-gray-600">
+                    {[
+                      'Tell us what you need and where.',
+                      'Get quotes from verified professionals.',
+                      'Ask questions before you choose.',
+                      'Pay securely and unlock contact details.',
+                    ][i]}
+                  </p>
+                </motion.li>
               ))}
             </ol>
           </div>
 
-          {/* Surveyor Flow */}
           <div>
-            <h3 className="text-2xl font-bold text-blue-600 mb-6">
-              {t('For Surveyors', 'Per Geometri')}
+            <h3 className="text-xl font-semibold text-blue-600 mb-4">
+              For Surveyors
             </h3>
             <ol className="space-y-6">
-              {surveyorSteps.map(([title, desc], idx) => (
-                <li key={idx} className="flex items-start space-x-4">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center">
-                    {idx + 1}
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-stone-800">{title}</h4>
-                    <p className="text-sm text-stone-600">{desc}</p>
-                  </div>
-                </li>
+              {steps.surveyor.map((step, i) => (
+                <motion.li
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.2, duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="relative pl-10 text-gray-800"
+                >
+                  <span className="absolute left-0 top-0 w-6 h-6 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center font-bold">
+                    {i + 1}
+                  </span>
+                  <strong>{step}</strong>
+                  <p className="text-sm text-gray-600">
+                    {[
+                      'Create your profile and choose areas.',
+                      'Get notified of matching projects.',
+                      'Send offers and answer questions.',
+                      'Get paid after buyer selects you.',
+                    ][i]}
+                  </p>
+                </motion.li>
               ))}
             </ol>
           </div>
