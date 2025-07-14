@@ -1,91 +1,70 @@
 // components/home/UserTypeCards.tsx
 'use client'
 
-import { useState } from 'react'
-import { useLanguage } from '@/app/providers/language-provider'
-import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { Briefcase, Ruler } from 'lucide-react'
 
 export default function UserTypeCards() {
-  const { t } = useLanguage()
-  const [userType, setUserType] = useState<'buyer' | 'surveyor' | null>(null)
+  const cards = [
+    {
+      icon: <Briefcase className="w-10 h-10 text-orange-500" />,
+      title: 'I Need a Survey',
+      description:
+        'Get quotes from verified surveyors for your property in Puglia.',
+      features: [
+        'Compare multiple quotes',
+        'Secure messaging',
+        'Protected payment',
+      ],
+    },
+    {
+      icon: <Ruler className="w-10 h-10 text-orange-500" />,
+      title: 
+        
+        "I'm a Surveyor",
+      description:
+        'Join our network and receive project requests from buyers.',
+      features: [
+        'Free registration',
+        '10% platform fee only',
+        'Guaranteed payment',
+      ],
+    },
+  ]
 
   return (
-    <section className="bg-white py-20 px-4">
-      <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-4xl font-bold text-stone-800 mb-12">
-          {t('Choose your role', 'Scegli il tuo ruolo')}
+    <section className="bg-white py-20 px-6 sm:px-12 lg:px-24">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-center text-3xl sm:text-4xl font-light text-gray-900 mb-12">
+          <strong className="font-bold">Choose</strong> your role
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* Buyer Card */}
-          <div
-            onClick={() => setUserType('buyer')}
-            className={`bg-white rounded-2xl p-8 shadow-lg border-2 transition-all cursor-pointer hover:shadow-xl ${
-              userType === 'buyer' ? 'border-orange-500' : 'border-transparent'
-            }`}
-          >
-            <div className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                <span className="text-3xl">🏡</span>
-              </div>
-              <h3 className="text-2xl font-bold text-stone-800 mb-2">
-                {t('I Need a Survey', 'Ho Bisogno di una Perizia')}
-              </h3>
-              <p className="text-stone-600 mb-4 text-sm">
-                {t(
-                  'Get quotes from verified surveyors for your property in Puglia.',
-                  'Ricevi preventivi da geometri verificati per la tua proprietà in Puglia.'
-                )}
-              </p>
-              <ul className="text-green-600 text-sm space-y-1">
-                <li>✔ {t('Compare multiple quotes', 'Confronta più preventivi')}</li>
-                <li>✔ {t('Secure messaging', 'Messaggistica sicura')}</li>
-                <li>✔ {t('Protected payment', 'Pagamento protetto')}</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Surveyor Card */}
-          <div
-            onClick={() => setUserType('surveyor')}
-            className={`bg-white rounded-2xl p-8 shadow-lg border-2 transition-all cursor-pointer hover:shadow-xl ${
-              userType === 'surveyor' ? 'border-blue-500' : 'border-transparent'
-            }`}
-          >
-            <div className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <span className="text-3xl">📐</span>
-              </div>
-              <h3 className="text-2xl font-bold text-stone-800 mb-2">
-                {t("I'm a Surveyor", 'Sono un Geometra')}
-              </h3>
-              <p className="text-stone-600 mb-4 text-sm">
-                {t(
-                  'Join our network and receive project requests from buyers.',
-                  'Unisciti alla nostra rete e ricevi richieste da acquirenti.'
-                )}
-              </p>
-              <ul className="text-green-600 text-sm space-y-1">
-                <li>✔ {t('Free registration', 'Registrazione gratuita')}</li>
-                <li>✔ {t('10% platform fee only', 'Solo 10% di commissione')}</li>
-                <li>✔ {t('Guaranteed payment', 'Pagamento garantito')}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {userType && (
-          <div className="mt-10">
-            <Link
-              href={userType === 'buyer' ? '/survey/request' : '/surveyor/register'}
-              className="inline-block bg-orange-500 text-white px-10 py-4 rounded-full font-bold text-lg shadow hover:shadow-xl transition"
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {cards.map((card, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.2, duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-gray-50 rounded-2xl border border-gray-200 shadow-lg p-8 text-center hover:shadow-xl hover:-translate-y-1 transition"
             >
-              {userType === 'buyer'
-                ? t('Request Survey Quotes', 'Richiedi Preventivi')
-                : t('Join as Surveyor', 'Registrati come Geometra')}
-            </Link>
-          </div>
-        )}
+              <div className="mb-4 flex justify-center">{card.icon}</div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                {card.title}
+              </h3>
+              <p className="text-gray-600 mb-4">{card.description}</p>
+              <ul className="text-sm text-left text-gray-700 space-y-2">
+                {card.features.map((feature, i) => (
+                  <li key={i} className="relative pl-6">
+                    <span className="absolute left-0 top-1 text-green-500 font-bold">✓</span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )
