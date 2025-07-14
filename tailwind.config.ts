@@ -8,6 +8,16 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '1rem',
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+      },
+    },
     extend: {
       colors: {
         terracotta: {
@@ -40,11 +50,16 @@ const config: Config = {
         },
       },
       fontFamily: {
-        playfair: ['var(--font-playfair)'],
-        opensans: ['var(--font-opensans)'],
+        playfair: ['var(--font-playfair)', 'Playfair Display', 'serif'],
+        opensans: ['var(--font-opensans)', 'Open Sans', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
+      },
+      animation: {
+        'spin-slow': 'spin 40s linear infinite',
       },
     },
   },
   plugins: [],
 };
+
 export default config;
