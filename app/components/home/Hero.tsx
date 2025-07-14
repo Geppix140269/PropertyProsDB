@@ -1,58 +1,34 @@
-// components/home/Hero.tsx
-'use client'
+/* PATH: app/components/home/Hero.tsx */
+import React from 'react';
+import Link from 'next/link';
 
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-
-export default function Hero() {
+const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-orange-500 text-white py-24 px-6 sm:px-12 lg:px-20">
-      <div className="absolute -top-1/2 -right-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_70%)] animate-spin-slow" />
+    <section className="relative bg-gradient-to-br from-terracotta via-sea to-olive animate-gradient-shift text-white overflow-hidden">
+      {/* Optional shimmer layer */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style={{ background: 'radial-gradient(circle at 20% 20%, white, transparent 60%)', animation: 'shimmer 20s linear infinite' }} />
 
-      <div className="relative max-w-4xl mx-auto text-center z-10">
-        <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-2 rounded-full text-sm font-semibold shadow-md mb-6 animate-pulse">
-          <span className="inline-block w-2 h-2 rounded-full bg-green-400 mr-2 animate-ping"></span>
-          Verified Local Surveyors
+      <div className="container mx-auto px-6 py-32 relative z-10 text-center">
+        <div className="inline-block bg-white/10 px-6 py-2 rounded-full text-sm font-semibold tracking-wide backdrop-blur-md glass mb-6">
+          Surveyors You Can Trust
         </div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl sm:text-5xl md:text-6xl font-light leading-tight mb-4 text-shadow-md"
-        >
-          <strong className="font-bold">Your Survey</strong> is in good hands
-        </motion.h1>
+        <h1 className="text-5xl md:text-6xl font-playfair font-light leading-tight text-balance">
+          Property Surveys in <strong className="font-bold">Puglia</strong>, Reinvented.
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8"
-        >
-          Get multiple quotes from verified local surveyors. Pay securely. Choose with confidence.
-        </motion.p>
+        <p className="mt-6 text-lg md:text-xl text-white/90 font-opensans max-w-2xl mx-auto">
+          Connect with certified local professionals. Compare quotes, chat securely, and move forward with confidence.
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="flex flex-col sm:flex-row justify-center gap-4"
-        >
-          <Link
-            href="/buyer/request"
-            className="bg-white text-orange-600 font-semibold px-6 py-3 rounded-full shadow-md hover:scale-105 transition transform"
-          >
-            Request a Survey
+        <div className="mt-10">
+          <Link href="/survey/request">
+            <span className="btn-premium ripple">Request a Survey</span>
           </Link>
-          <Link
-            href="/professional/register"
-            className="bg-white/10 text-white border border-white/20 px-6 py-3 rounded-full font-semibold hover:bg-white/20 transition"
-          >
-            Register as Surveyor
-          </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export default Hero;
