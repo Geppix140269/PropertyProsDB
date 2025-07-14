@@ -94,6 +94,60 @@ export async function submitBuyerInquiry(data: BuyerInquiry) {
   }
 }
 
+// Survey Request Type
+export interface SurveyRequest {
+  id?: string
+  first_name: string
+  last_name: string
+  email: string
+  phone: string
+  property_type: string
+  property_address: string
+  city: string
+  province: string
+  cadastral_details?: string
+  survey_types: string[]
+  urgency: string
+  max_budget: string
+  additional_notes?: string
+  status?: string
+  created_at?: string
+}
+
+// Submit Survey Request
+export async function submitSurveyRequest(data: any) {
+  try {
+    const surveyData: SurveyRequest = {
+      first_name: data.firstName,
+      last_name: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      property_type: data.propertyType,
+      property_address: data.propertyAddress,
+      city: data.city,
+      province: data.province,
+      cadastral_details: data.cadastralDetails,
+      survey_types: data.surveyType,
+      urgency: data.urgency,
+      max_budget: data.maxBudget,
+      additional_notes: data.additionalNotes,
+      status: 'pending'
+    }
+
+    const { data: result, error } = await supabase
+      .from('survey_requests')
+      .insert([surveyData])
+      .select()
+      .single()
+
+    if (error) throw error
+    return { success: true, data: result }
+  } catch (error) {
+    console.error('Error submitting survey request:', error)
+    return { success: false, error }
+  }
+}
+
 // Auth helpers
 export async function signUp(email: string, password: string) {
   const { data, error } = await supabase.auth.signUp({
