@@ -2,6 +2,7 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { submitBuyerInquiry } from '@/lib/supabase/client'
 
 interface FormData {
   // Contact Information
@@ -71,14 +72,60 @@ export default function BuyerInquiryPage() {
   const handleSubmit = async () => {
     setIsSubmitting(true)
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    // In production, this would send to Supabase
-    console.log('Form submitted:', formData)
-    
-    // Redirect to success page
-    router.push('/buyer/inquiry/success')
+    try {
+      // Prepare data for Supabase
+      const inquiryData = {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        nationality: formData.nationality,
+        preferred_language: formData.preferredLanguage,
+        property_types: formData.propertyType,
+        budget_range: formData.budget,
+        preferred_locations: formData.locations,
+        timeline: formData.timeline,
+        purchase_purpose: formData.purpose,
+        has_visited_puglia: formData.hasVisitedPuglia,
+        needs_financing: formData.needsFinancing,
+        additional_notes: formData.additionalNotes
+      }
+
+      // Submit to Supabase
+      const { success, error } = await submitBuyerInquiry(inquiryData)
+      
+      if (success) {
+        // Send notification email (API route)
+        try {
+          await fetch('/api/notifications/buyer-inquiry', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(inquiryData)
+          })
+        } catch (emailError) {
+          console.error('Email notification failed:', emailError)
+          // Don't block the user if email fails
+        }
+        
+        // Redirect to success page
+        router.push('/buyer/inquiry/success')
+      } else {
+        // Show error message
+        alert(language === 'en' 
+          ? 'There was an error submitting your inquiry. Please try again.' 
+          : 'Si è verificato un errore. Riprova.'
+        )
+        console.error('Submission error:', error)
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      alert(language === 'en' 
+        ? 'Something went wrong. Please try again.' 
+        : 'Qualcosa è andato storto. Riprova.'
+      )
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
