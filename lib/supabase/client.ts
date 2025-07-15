@@ -18,55 +18,89 @@ function generateAnonymousUsername(city: string): string {
   return `Surveyor_${code}_${random}`
 }
 
-// FIXED: Submit buyer inquiry - simplified to work with database schema
+// FIXED: Submit buyer inquiry - matches your EXACT database schema
 export async function submitBuyerInquiry(data: any) {
   try {
     console.log('Submitting buyer inquiry with data:', data)
     
-    // Create the inquiry data matching the database schema
-    const inquiryData = {
-      // Contact info (stored directly in inquiries table)
-      first_name: data.first_name || data.firstName,
-      last_name: data.last_name || data.lastName,
-      email: data.email,
-      phone: data.phone,
-      nationality: data.nationality,
-      preferred_language: data.preferred_language || data.preferredLanguage || 'en',
+    // Step 1: Create or find buyer first (if you want to use buyers table)
+    let buyer_id = null
+    
+    if (data.email) {
+      // Try to create buyer record
+      const buyerData = {
+        first_name: data.first_name || data.firstName,
+        last_name: data.last_name || data.lastName,
+        email: data.email,
+        phone: data.phone,
+        nationality: data.nationality,
+        preferred_language: data.preferred_language || data.preferredLanguage || 'en',
+        created_at: new Date().toISOString()
+      }
       
-      // Property preferences
+      const { data: buyer, error: buyerError } = await supabase
+        .from('buyers')
+        .upsert([buyerData], { onConflict: 'email' })
+        .select()
+        .single()
+        
+      if (!buyerError && buyer) {
+        buyer_id = buyer.id
+      }
+    }
+    
+    // Step 2: Create inquiry with ONLY the columns that exist in your table
+    const inquiryData = {
+      // Reference to buyer (optional)
+      buyer_id: buyer_id,
+      
+      // Property data - using EXACT column names from your schema
       property_types: Array.isArray(data.property_types) ? data.property_types : 
                      Array.isArray(data.propertyType) ? data.propertyType : 
                      data.propertyType ? [data.propertyType] : [],
+      
+      budget: data.budget_range || data.budget || 'not specified',
       budget_range: data.budget_range || data.budget,
+      
+      locations: Array.isArray(data.preferred_locations) ? data.preferred_locations :
+                Array.isArray(data.locations) ? data.locations :
+                data.locations ? [data.locations] : [],
       preferred_locations: Array.isArray(data.preferred_locations) ? data.preferred_locations :
                           Array.isArray(data.locations) ? data.locations :
                           data.locations ? [data.locations] : [],
+      
       timeline: data.timeline,
+      purpose: data.purchase_purpose || data.purpose,
       purchase_purpose: data.purchase_purpose || data.purpose,
       
-      // Additional info
+      // Boolean fields
       has_visited_puglia: Boolean(data.has_visited_puglia || data.hasVisitedPuglia),
       needs_financing: Boolean(data.needs_financing || data.needsFinancing),
-      additional_notes: data.additional_notes || data.additionalNotes || '',
-      
-      // Survey-specific fields (for future use)
       is_survey_request: Boolean(data.is_survey_request),
+      
+      // Text fields
+      additional_notes: data.additional_notes || data.additionalNotes || '',
       property_address: data.property_address,
       property_city: data.property_city,
       property_province: data.property_province,
       cadastral_details: data.cadastral_details,
+      
+      // Array fields
       survey_types: Array.isArray(data.survey_types) ? data.survey_types : [],
+      
+      // Other fields
       urgency: data.urgency,
       max_budget: data.max_budget,
       
       // System fields
       status: 'new',
+      priority: 'normal',
       created_at: new Date().toISOString()
     }
 
-    console.log('Prepared inquiry data:', inquiryData)
+    console.log('Prepared inquiry data for your schema:', inquiryData)
 
-    // Insert directly into inquiries table
+    // Insert into inquiries table
     const { data: inquiry, error } = await supabase
       .from('inquiries')
       .insert([inquiryData])
