@@ -1,3 +1,4 @@
+// PATH: app/components/AuthWrapper.tsx
 import React, { useState, useEffect } from 'react';
 
 interface AuthWrapperProps {
