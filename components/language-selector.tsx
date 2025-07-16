@@ -2,21 +2,17 @@
 'use client'
 import { useLanguage } from '@/app/providers/language-provider'
 
-export default function LanguageSelector() {
+export function LanguageSelector() {
   const { language, setLanguage } = useLanguage()
 
-  const toggleLanguage = () => {
-    const newLanguage = language === 'it' ? 'en' : 'it'
-    setLanguage(newLanguage)
-  }
-
   return (
-    <button 
-      onClick={toggleLanguage}
-      className="flex items-center space-x-2 text-stone-600 hover:text-terracotta font-medium transition-colors duration-200"
+    <select 
+      value={language}
+      onChange={(e) => setLanguage(e.target.value as 'en' | 'it')}
+      className="px-3 py-1.5 text-sm text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
     >
-      <span className="text-xl">{language === 'it' ? '🇮🇹' : '🇬🇧'}</span>
-      <span>{language === 'it' ? 'Italiano' : 'English'}</span>
-    </button>
+      <option value="en">🇬🇧 English</option>
+      <option value="it">🇮🇹 Italiano</option>
+    </select>
   )
 }

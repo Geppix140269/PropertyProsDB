@@ -1,3 +1,5 @@
+// PATH: app/components/ProfessionalDashboard.tsx
+'use client'
 import React, { useState } from 'react';
 
 interface Inquiry {
@@ -428,7 +430,7 @@ export default function ProfessionalDashboard() {
                   className="w-full px-4 py-3 rounded-lg border border-stone-300 focus:border-sea focus:ring-2 focus:ring-sea/20"
                   placeholder={language === 'it' 
                     ? 'Descrivi i servizi inclusi, la tua esperienza, perché sei la scelta migliore...'
-                    : 'Describe included services, your experience, why you\'re the best choice...'
+                    : 'Describe included services, your experience, why you are the best choice...'
                   }
                 />
               </div>

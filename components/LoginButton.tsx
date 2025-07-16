@@ -1,17 +1,21 @@
 // PATH: app/components/LoginButton.tsx
 'use client'
-import Link from 'next/link'
-import { useLanguage } from '@/app/providers/language-provider'
+import { useRouter } from 'next/navigation'
 
 export default function LoginButton() {
-  const { language } = useLanguage()
+  const router = useRouter()
+
+  const handleLogin = () => {
+    // Route to the professional dashboard login
+    router.push('/professional/dashboard')
+  }
 
   return (
-    <Link 
-      href="/professional/dashboard"
-      className="px-4 py-2 bg-navy text-white font-medium rounded-lg hover:bg-navy/90 transition-colors"
+    <button 
+      onClick={handleLogin}
+      className="bg-terracotta text-white px-6 py-2 rounded-lg font-medium hover:bg-terracotta-dark transition-all duration-200"
     >
-      {language === 'en' ? 'Professional Login' : 'Accesso Professionisti'}
-    </Link>
+      Login
+    </button>
   )
 }
