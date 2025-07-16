@@ -4,6 +4,7 @@ import { Inter, Playfair_Display } from 'next/font/google'
 import Link from 'next/link'
 import LoginButton from './components/LoginButton'
 import LanguageSelector from './components/LanguageSelector'
+import ApulinkLogo from './components/ApulinkLogo'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -34,13 +35,8 @@ export default function RootLayout({
           <header className="bg-white shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center py-4">
-                {/* Logo */}
-                <Link href="/" className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-terracotta to-sea rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">A</span>
-                  </div>
-                  <span className="font-playfair text-2xl font-bold text-stone-800">Apulink</span>
-                </Link>
+                {/* Official Apulink Logo */}
+                <ApulinkLogo size="md" />
 
                 {/* Navigation Links */}
                 <nav className="hidden md:flex items-center space-x-8">
@@ -74,7 +70,8 @@ export default function RootLayout({
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
               <div className="grid md:grid-cols-4 gap-8">
                 <div>
-                  <h3 className="font-playfair text-2xl text-terracotta mb-4">Apulink</h3>
+                  {/* Footer Logo */}
+                  <ApulinkLogo size="sm" className="mb-4" />
                   <p className="text-sm">
                     Your trusted bridge to property investment in Puglia. Connecting worlds, building futures.
                   </p>
