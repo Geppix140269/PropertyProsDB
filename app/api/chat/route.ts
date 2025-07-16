@@ -42,6 +42,8 @@ Never:
 - Use apostrophes - always write "do not" instead of "don't", "we are" instead of "we're", etc.`;
 
 export async function POST(request: Request) {
+  let language = 'en'; // Default language
+  
   try {
     if (!OPENAI_API_KEY) {
       console.error('OpenAI API key not configured');
@@ -54,7 +56,12 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json()
-    const { messages, language } = body
+    const { messages, language: requestLanguage } = body
+    
+    // Set language from request if provided
+    if (requestLanguage) {
+      language = requestLanguage;
+    }
 
     // Prepare messages for OpenAI
     const openAIMessages: ChatMessage[] = [
