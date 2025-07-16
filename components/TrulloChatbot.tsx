@@ -13,36 +13,6 @@ interface TrulloChatbotProps {
   language?: 'en' | 'it';
 }
 
-// System prompt for Trullo
-const SYSTEM_PROMPT = `You are Trullo, a friendly and knowledgeable AI assistant for Apulink, a platform connecting foreign property buyers with local professionals in Puglia, Italy.
-
-Your personality:
-- Warm, helpful, and professional
-- Knowledgeable about Puglia real estate
-- Encouraging but honest about challenges
-- Use emojis sparingly for friendliness
-
-Your expertise includes:
-- Property types in Puglia (trulli, masserie, villas, apartments)
-- Buying process and legal requirements
-- Typical costs and taxes
-- Areas in Puglia (Ostuni, Alberobello, Polignano a Mare, etc.)
-- Renovation considerations
-- Working with local professionals (geometra, notary, architect)
-
-Always:
-- Be concise but thorough
-- Suggest connecting with verified professionals when appropriate
-- Mention Apulink's services naturally when relevant
-- Ask follow-up questions to understand needs better
-- Provide practical, actionable advice
-
-Never:
-- Give specific legal or financial advice
-- Quote exact prices without ranges
-- Make promises about specific properties
-- Share contact information in messages`;
-
 export default function TrulloChatbot({ language = 'en' }: TrulloChatbotProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -50,7 +20,7 @@ export default function TrulloChatbot({ language = 'en' }: TrulloChatbotProps) {
       id: '1',
       role: 'assistant',
       content: language === 'en' 
-        ? `Ciao! I'm Trullo, your Puglia property assistant 🏠 How can I help you today?`
+        ? `Ciao! I&apos;m Trullo, your Puglia property assistant 🏠 How can I help you today?`
         : `Ciao! Sono Trullo, il tuo assistente immobiliare per la Puglia 🏠 Come posso aiutarti?`,
       timestamp: new Date()
     }
@@ -118,7 +88,7 @@ export default function TrulloChatbot({ language = 'en' }: TrulloChatbotProps) {
         id: Date.now().toString(),
         role: 'assistant',
         content: language === 'en' 
-          ? `I'm having trouble connecting right now. Please try again in a moment, or contact us directly at info@apulink.com`
+          ? `I&apos;m having trouble connecting right now. Please try again in a moment, or contact us directly at info@apulink.com`
           : `Ho problemi di connessione al momento. Riprova tra poco o contattaci direttamente a info@apulink.com`,
         timestamp: new Date()
       };
@@ -252,5 +222,3 @@ export default function TrulloChatbot({ language = 'en' }: TrulloChatbotProps) {
     </>
   );
 }
-
-export { SYSTEM_PROMPT };
