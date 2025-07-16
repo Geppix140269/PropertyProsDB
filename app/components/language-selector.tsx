@@ -1,18 +1,24 @@
-// PATH: app/components/language-selector.tsx
+// PATH: app/components/LanguageSelector.tsx
 'use client'
-import { useLanguage } from '@/app/providers/language-provider'
+import { useState } from 'react'
 
-export function LanguageSelector() {
-  const { language, setLanguage } = useLanguage()
+export default function LanguageSelector() {
+  const [language, setLanguage] = useState<'it' | 'en'>('it')
+
+  const toggleLanguage = () => {
+    const newLanguage = language === 'it' ? 'en' : 'it'
+    setLanguage(newLanguage)
+    // In the future, this will also update the global language context
+    // For now, it just updates the local state
+  }
 
   return (
-    <select 
-      value={language}
-      onChange={(e) => setLanguage(e.target.value as 'en' | 'it')}
-      className="px-3 py-1.5 text-sm text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+    <button 
+      onClick={toggleLanguage}
+      className="flex items-center space-x-2 text-stone-600 hover:text-terracotta font-medium transition-colors duration-200"
     >
-      <option value="en">🇬🇧 English</option>
-      <option value="it">🇮🇹 Italiano</option>
-    </select>
+      <span className="text-xl">{language === 'it' ? '🇮🇹' : '🇬🇧'}</span>
+      <span>{language === 'it' ? 'Italiano' : 'English'}</span>
+    </button>
   )
 }
