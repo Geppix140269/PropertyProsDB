@@ -2,10 +2,10 @@
 import './globals.css'
 import { Inter, Playfair_Display } from 'next/font/google'
 import Link from 'next/link'
-import LoginButton from './components/LoginButton'
-import LanguageSelector from './components/language-selector'
-import ApulinkLogo from './components/ApulinkLogo'
-import { LanguageProvider } from './providers/language-provider'
+import LoginButton from '@/app/components/LoginButton'
+import LanguageSelector from '@/app/components/language-selector'
+import ApulinkLogo from '@/app/components/ApulinkLogo'
+import { LanguageProvider } from '@/app/providers/language-provider'
 
 const inter = Inter({ 
   subsets: ['latin'],
