@@ -3,72 +3,56 @@
 import Link from 'next/link'
 
 interface ApulinkLogoProps {
-  className?: string
   size?: 'sm' | 'md' | 'lg'
-  showText?: boolean
+  className?: string
 }
 
-export default function ApulinkLogo({ 
-  className = '', 
-  size = 'md', 
-  showText = true 
-}: ApulinkLogoProps) {
-  
-  const sizeClasses = {
-    sm: 'w-8 h-8',
-    md: 'w-12 h-12', 
-    lg: 'w-16 h-16'
-  }
-  
-  const textSizeClasses = {
-    sm: 'text-lg',
-    md: 'text-2xl',
-    lg: 'text-3xl'
+export default function ApulinkLogo({ size = 'md', className = '' }: ApulinkLogoProps) {
+  const sizes = {
+    sm: { text: 'text-xl', icon: 'w-6 h-6' },
+    md: { text: 'text-2xl', icon: 'w-8 h-8' },
+    lg: { text: 'text-3xl', icon: 'w-10 h-10' }
   }
 
   return (
-    <Link href="/" className={`flex items-center space-x-3 ${className}`}>
-      <div className={`relative ${sizeClasses[size]} flex-shrink-0`}>
-        {/* Option 1: If you have an image file */}
-        {/* <img 
-          src="/logo/apulink-logo.svg" 
-          alt="Apulink Logo"
-          className="w-full h-full object-contain"
-        /> */}
-        
-        {/* Option 2: If you have an SVG to paste directly */}
-        {/* <svg viewBox="0 0 100 100" className="w-full h-full">
-          [Your SVG content here]
-        </svg> */}
-        
-        {/* Official Apulink Logo - Magnifying glass with Puglia */}
-        <svg viewBox="0 0 100 100" className="w-full h-full">
+    <Link href="/" className={`flex items-center space-x-2 ${className}`}>
+      {/* Magnifying Glass with Puglia Map */}
+      <div className={`relative ${sizes[size].icon}`}>
+        <svg viewBox="0 0 40 40" className="w-full h-full">
+          {/* Magnifying glass circle */}
+          <circle 
+            cx="16" 
+            cy="16" 
+            r="12" 
+            fill="none" 
+            stroke="#E2725B" 
+            strokeWidth="3"
+          />
+          
+          {/* Puglia region shape (simplified) inside magnifying glass */}
+          <path 
+            d="M 10 12 L 14 10 L 18 11 L 20 14 L 18 18 L 16 20 L 12 19 L 10 16 Z" 
+            fill="#1e3a5f"
+            opacity="0.8"
+          />
+          
           {/* Magnifying glass handle */}
-          <line x1="70" y1="70" x2="90" y2="90" stroke="#1e3a5f" strokeWidth="6" strokeLinecap="round" />
-          
-          {/* Magnifying glass circle frame */}
-          <circle cx="40" cy="40" r="32" fill="#ffffff" stroke="#1e3a5f" strokeWidth="5" />
-          
-          {/* Puglia region silhouette inside magnifying glass */}
-          <g transform="translate(20, 20)">
-            <path d="M8 15 C12 12, 18 14, 22 18 C26 22, 28 28, 30 32 C32 36, 35 40, 32 44 C28 48, 24 45, 20 42 C18 46, 14 49, 10 46 C6 42, 4 38, 2 32 C0 28, 2 22, 4 18 C6 14, 8 15, 8 15 Z M15 35 C16 35, 17 36, 17 37 C17 38, 16 39, 15 39 C14 39, 13 38, 13 37 C13 36, 14 35, 15 35 Z" 
-                  fill="#d2691e" />
-          </g>
+          <line 
+            x1="24" 
+            y1="24" 
+            x2="34" 
+            y2="34" 
+            stroke="#E2725B" 
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
         </svg>
       </div>
       
-      {showText && (
-        <div className="flex flex-col">
-          <span className={`font-playfair ${textSizeClasses[size]} font-bold text-stone-800`}>
-            Apulink
-          </span>
-          {size === 'lg' && (
-            <span className="text-xs font-medium text-stone-600 tracking-wider uppercase">
-              Property Survey Platform
-            </span>
-          )}
-        </div>
-      )}
+      {/* Text Logo */}
+      <span className={`font-playfair font-bold text-navy ${sizes[size].text}`}>
+        Apulink
+      </span>
     </Link>
   )
 }
