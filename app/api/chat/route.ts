@@ -8,7 +8,7 @@ interface ChatMessage {
   content: string;
 }
 
-// System prompt for Trullo
+// System prompt for Trullo - NO APOSTROPHES
 const SYSTEM_PROMPT = `You are Trullo, a friendly and knowledgeable AI assistant for Apulink, a platform connecting foreign property buyers with local professionals in Puglia, Italy.
 
 Your personality:
@@ -39,7 +39,7 @@ Never:
 - Quote exact prices without ranges
 - Make promises about specific properties
 - Share personal contact information
-- Use apostrophes - use "do not" instead of "don't"`;
+- Use apostrophes - always write "do not" instead of "don't", "we are" instead of "we're", etc.`;
 
 export async function POST(request: Request) {
   try {
@@ -96,7 +96,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Chat API error:', error)
     
-    // Fallback response
+    // Fallback response - NO APOSTROPHES
     const fallbackMessage = language === 'it' 
       ? 'Mi dispiace, sto avendo problemi tecnici. Per favore riprova o contattaci a info@apulink.com per assistenza immediata.'
       : 'I apologize, I am experiencing technical difficulties. Please try again or contact us at info@apulink.com for immediate assistance.'
