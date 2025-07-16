@@ -73,12 +73,19 @@ export default function ProfessionalSignup() {
   }
 
   const handleArrayToggle = (field: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: prev[field as keyof typeof prev].includes(value)
-        ? (prev[field as keyof typeof prev] as string[]).filter(item => item !== value)
-        : [...(prev[field as keyof typeof prev] as string[]), value]
-    }))
+    setFormData(prev => {
+      const currentArray = prev[field as keyof typeof prev] as string[]
+      if (!Array.isArray(currentArray)) {
+        return prev
+      }
+      
+      return {
+        ...prev,
+        [field]: currentArray.includes(value)
+          ? currentArray.filter(item => item !== value)
+          : [...currentArray, value]
+      }
+    })
   }
 
   const validateStep = (step: number) => {
