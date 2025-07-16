@@ -1,40 +1,75 @@
 // PATH: app/components/home/Hero.tsx
-import React from 'react';
-import Link from 'next/link';
+'use client'
+import { useLanguage } from '@/app/providers/language-provider'
+import SurvEYESMascot from '../SurvEYESMascot'
+import Link from 'next/link'
 
-const Hero = () => {
+export default function Hero() {
+  const { language } = useLanguage()
+
   return (
-    <section className="relative bg-gradient-to-br from-terracotta via-sea to-olive animate-gradient-shift text-white overflow-hidden">
-      {/* Optional shimmer layer */}
-      <div
-        className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at 20% 20%, white, transparent 60%)',
-          animation: 'shimmer 20s linear infinite',
-        }}
-      />
+    <section className="relative overflow-hidden bg-gradient-to-br from-cream via-white to-sky-50 pt-20 pb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <div className="space-y-8">
+            <h1 className="font-playfair text-5xl lg:text-6xl font-bold text-navy leading-tight">
+              {language === 'en' 
+                ? 'Need a Property Survey in Puglia?'
+                : 'Hai Bisogno di un Rilievo in Puglia?'}
+            </h1>
+            
+            <p className="text-xl text-stone-600 leading-relaxed">
+              {language === 'en'
+                ? 'Connect with certified geometri for professional property surveys, cadastral reports, and technical assessments - all without leaving home.'
+                : 'Connettiti con geometri certificati per rilievi professionali, relazioni catastali e valutazioni tecniche - tutto senza uscire di casa.'}
+            </p>
+            
+            {/* Two CTAs for clear user paths */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link 
+                href="/buyer/inquiry"
+                className="inline-flex items-center justify-center px-8 py-4 bg-terracotta text-white font-semibold rounded-lg hover:bg-terracotta/90 transition-all hover:scale-105 shadow-lg"
+              >
+                {language === 'en' ? 'I Need a Survey' : 'Ho Bisogno di un Rilievo'}
+              </Link>
+              
+              <Link 
+                href="/professional/signup"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-navy font-semibold rounded-lg border-2 border-navy hover:bg-navy hover:text-white transition-all"
+              >
+                {language === 'en' ? 'I am a Geometra' : 'Sono un Geometra'}
+              </Link>
+            </div>
 
-      <div className="container mx-auto px-6 py-32 relative z-10 text-center">
-        <div className="inline-block bg-white/10 px-6 py-2 rounded-full text-sm font-semibold tracking-wide backdrop-blur-md glass mb-6">
-          Introducing SurvEYES™ by Apulink
-        </div>
+            {/* Trust Indicators */}
+            <div className="flex items-center gap-6 text-sm text-stone-600">
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                {language === 'en' ? 'Verified Professionals' : 'Professionisti Verificati'}
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                {language === 'en' ? 'Official Documentation' : 'Documentazione Ufficiale'}
+              </div>
+            </div>
+          </div>
 
-        <h1 className="text-5xl md:text-6xl font-playfair font-light leading-tight text-balance">
-          Your <strong className="font-bold">Eyes</strong> on the Ground in <strong className="font-bold">Puglia</strong>
-        </h1>
-
-        <p className="mt-6 text-lg md:text-xl text-white/90 font-opensans max-w-2xl mx-auto">
-          Get expert surveys, legal reviews, and renovation estimates — without stepping on a plane.
-        </p>
-
-        <div className="mt-10">
-          <Link href="/survey/request">
-            <span className="btn-premium ripple">Request a Survey</span>
-          </Link>
+          {/* Right Side - Mascot */}
+          <div className="relative lg:pl-12">
+            <SurvEYESMascot 
+              size="xl" 
+              expression="confident"
+              showMagnifyingGlass={true}
+              className="mx-auto"
+            />
+          </div>
         </div>
       </div>
     </section>
-  );
-};
-
-export default Hero;
+  )
+}
