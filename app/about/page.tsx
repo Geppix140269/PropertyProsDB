@@ -28,11 +28,11 @@ export default function AboutPage() {
               </p>
               
               <p className="text-stone-700 mb-4">
-                Founded in 2024 by 1402 Celsius Ltd, we set out to solve this problem by creating a digital bridge between foreign property buyers and Puglia's most qualified local professionals. Our platform connects international investors with verified geometri, architects, lawyers, notaries, and other essential service providers who understand both the local market and the unique needs of foreign buyers.
+                Founded in 2024 by 1402 Celsius Ltd, we set out to solve this problem by creating a digital bridge between foreign property buyers and Puglia&apos;s most qualified local professionals. Our platform connects international investors with verified geometri, architects, lawyers, notaries, and other essential service providers who understand both the local market and the unique needs of foreign buyers.
               </p>
               
               <p className="text-stone-700 mb-4">
-                What started as a response to the growing international interest in Puglia's stunning trulli, masserie, and coastal properties has evolved into a comprehensive platform that streamlines the entire property acquisition process. We're not just a marketplace – we're your trusted partner in making your Italian property dreams a reality.
+                What started as a response to the growing international interest in Puglia&apos;s stunning trulli, masserie, and coastal properties has evolved into a comprehensive platform that streamlines the entire property acquisition process. We&apos;re not just a marketplace – we&apos;re your trusted partner in making your Italian property dreams a reality.
               </p>
             </div>
           </div>
@@ -99,7 +99,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="font-semibold text-stone-800 mb-2">Transparency</h3>
                 <p className="text-stone-600 text-sm">
-                  Clear pricing, honest communication, and no hidden fees. You always know exactly what you're paying for.
+                  Clear pricing, honest communication, and no hidden fees. You always know exactly what you&apos;re paying for.
                 </p>
               </div>
             </div>
@@ -113,14 +113,14 @@ export default function AboutPage() {
             
             <div className="prose prose-stone max-w-none">
               <p className="text-stone-700 mb-4">
-                Puglia, Italy's heel, is experiencing unprecedented international interest. Known for its distinctive trulli houses, stunning coastline, rich culinary traditions, and affordable property prices compared to other Italian regions, Puglia offers an authentic Italian lifestyle that's increasingly rare elsewhere.
+                Puglia, Italy&apos;s heel, is experiencing unprecedented international interest. Known for its distinctive trulli houses, stunning coastline, rich culinary traditions, and affordable property prices compared to other Italian regions, Puglia offers an authentic Italian lifestyle that&apos;s increasingly rare elsewhere.
               </p>
               
               <div className="grid md:grid-cols-2 gap-6 my-6">
                 <div className="bg-stone-50 rounded-lg p-4">
                   <h4 className="font-semibold text-stone-800 mb-2">🏛️ Unique Architecture</h4>
                   <p className="text-stone-600 text-sm">
-                    From UNESCO World Heritage trulli to grand masserie, Puglia's architecture is truly one-of-a-kind.
+                    From UNESCO World Heritage trulli to grand masserie, Puglia&apos;s architecture is truly one-of-a-kind.
                   </p>
                 </div>
                 
@@ -134,7 +134,7 @@ export default function AboutPage() {
                 <div className="bg-stone-50 rounded-lg p-4">
                   <h4 className="font-semibold text-stone-800 mb-2">🍝 Culinary Excellence</h4>
                   <p className="text-stone-600 text-sm">
-                    Home to some of Italy's finest cuisine, olive oil, and wine traditions.
+                    Home to some of Italy&apos;s finest cuisine, olive oil, and wine traditions.
                   </p>
                 </div>
                 
@@ -291,7 +291,7 @@ export default function AboutPage() {
               </p>
               
               <p className="text-stone-700 mb-4">
-                As we grow, we're committed to supporting the local economy in Puglia by connecting skilled professionals with international opportunities, while helping more people discover the unique beauty and investment potential of this remarkable region.
+                As we grow, we&apos;re committed to supporting the local economy in Puglia by connecting skilled professionals with international opportunities, while helping more people discover the unique beauty and investment potential of this remarkable region.
               </p>
             </div>
           </div>
@@ -302,7 +302,7 @@ export default function AboutPage() {
           <div className="bg-white rounded-xl shadow-sm p-8">
             <h2 className="font-playfair text-2xl font-bold text-stone-800 mb-4">Ready to Start Your Journey?</h2>
             <p className="text-stone-600 mb-6">
-              Whether you're looking to buy property in Puglia or you're a professional wanting to join our network, we're here to help.
+              Whether you&apos;re looking to buy property in Puglia or you&apos;re a professional wanting to join our network, we&apos;re here to help.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
